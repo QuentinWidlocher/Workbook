@@ -1,21 +1,26 @@
-import { Component, Vue } from "vue-property-decorator";
-import Entry from '@/models/entry';
-import Editor from '@/components/Editor/Editor.vue';
-import EntryList from '@/components/EntryList/EntryList.vue';
+import { Component, Vue, Watch } from "vue-property-decorator";
+import Entry from "@/models/entry";
+import Editor from "@/components/Editor/Editor.vue";
+import EntryList from "@/components/EntryList/EntryList.vue";
+import store from "@/store";
+import { entriesService as entries } from "@/services/entries";
 
 @Component({
-    components: {
-        Editor,
-        EntryList,
-    }
+  components: {
+    Editor,
+    EntryList
+  }
 })
 export default class Home extends Vue {
-    entries: Entry[] = [
-        { title: "Entrée 01", description: "" },
-        { title: "Entrée 02", description: "" },
-        { title: "Entrée 03", description: "" },
-        { title: "Entrée 04", description: "" },
-    ];
+  private mounted() {
+    entries.initializeEntries();
+  }
 
-    currentEntryIndex: number = 0;
+  private get entries(): Entry[] {
+    return store.state.entries;
+  }
+
+  private get currentEntry(): Entry {
+    return store.getters.currentEntry;
+  }
 }

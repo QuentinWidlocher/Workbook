@@ -1,7 +1,28 @@
 {
     "editor": {
         "description": {
-            "label": "Description FR"
+            "label": "Description"
+        },
+        "title": {
+            "label": "Titre"
+        },
+        "actions": {
+            "delete": {
+                "button": "Supprimer l'entrée",
+                "title": "Attention !",
+                "description": "Vous allez supprimer l'entrée \"{title}\" ! <br> Cette action est <strong class=\"font-weight-bold\">IRREVERSIBLE</strong>. <br> Êtes vous certains de vouloir la supprimer ?",
+                "confirm": "Supprimer l'entrée",
+                "cancel": "Revenir en arrière"
+            }
+        }
+    },
+    "entryList": {
+        "labels": {
+            "newEntry": "Nouvelle entrée",
+            "emptyEntry": "L'entrée ne peux pas être vide"
+        },
+        "actions": {
+            "addEntry": "Ajouter une entrée"
         }
     }
 }
