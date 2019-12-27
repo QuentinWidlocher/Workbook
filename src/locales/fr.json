@@ -10,7 +10,7 @@
             "delete": {
                 "button": "Supprimer l'entrée",
                 "title": "Attention !",
-                "description": "Vous allez supprimer l'entrée \"{title}\" ! <br> Cette action est <strong class=\"font-weight-bold\">IRREVERSIBLE</strong>. <br> Êtes vous certains de vouloir la supprimer ?",
+                "description": "Vous allez supprimer l'entrée \"{title}\" ! Cette action est <strong class=\"font-weight-bold\">IRRÉVERSIBLE</strong>. <br> Êtes vous certain de vouloir la supprimer ?",
                 "confirm": "Supprimer l'entrée",
                 "cancel": "Revenir en arrière"
             }

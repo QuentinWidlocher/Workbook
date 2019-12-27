@@ -1,0 +1,7 @@
+.v-content {
+    height : calc(100vh - 48px - 24px); // full screen minus navbar with padding-b == padding-t
+}
+
+.container {
+    height : calc(100vh - 48px); // full screen minus navbar
+}

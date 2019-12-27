@@ -1,0 +1,14 @@
+#EntryList {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .v-list {
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    .v-btn {
+        flex: initial;
+    }
+}

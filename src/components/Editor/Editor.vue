@@ -1,21 +1,27 @@
 <template>
   <div id="Editor" v-if="entry">
     <v-text-field
+      class="field-title"
       :label="$t('editor.title.label')"
       v-model="entry.title"
     ></v-text-field>
     <v-textarea
+      class="field-description"
       :label="$t('editor.description.label')"
-      auto-grow
+      no-resize
       filled
       v-model="entry.description"
     ></v-textarea>
-    <v-btn
-      color="error"
-      depressed
-      outlined
-      @click="deleteDialog = true"
-    >{{$t('editor.actions.delete.button')}}</v-btn>
+    <div class="d-flex justify-end">
+      <v-btn
+        color="error"
+        depressed
+        outlined
+        @click="deleteDialog = true"
+      >{{
+        $t('editor.actions.delete.button')
+      }}</v-btn>
+    </div>
 
     <v-dialog
       v-model="deleteDialog"
