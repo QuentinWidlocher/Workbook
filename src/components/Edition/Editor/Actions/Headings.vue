@@ -1,12 +1,12 @@
 <template>
-  <v-menu open-on-hover>
+  <v-menu open-on-hover offset-y>
     <template v-slot:activator="{ on }">
       <v-btn text small class="action-buttons" v-on="on">
         <v-icon>mdi-{{ icon }}</v-icon>
       </v-btn>
     </template>
 
-    <v-list>
+    <v-list dense>
       <v-list-item
         v-for="j in 3"
         :key="`heading-${j}`"

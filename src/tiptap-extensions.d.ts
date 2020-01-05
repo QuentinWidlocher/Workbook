@@ -8,8 +8,8 @@ declare module "tiptap-extensions" {
   export class OrderedList {}
   export class BulletList {}
   export class ListItem {}
-  export class TodoItem {}
-  export class TodoList { constructor(options?: { nested?: boolean }) }
+  export class TodoItem { constructor(options?: { nested?: boolean })}
+  export class TodoList {}
   export class Bold {}
   export class Code {}
   export class Italic {}

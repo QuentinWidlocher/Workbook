@@ -97,7 +97,7 @@ export default class Editor extends Vue {
       new OrderedList(),
       new BulletList(),
       new ListItem(),
-      new TodoItem(),
+      new TodoItem({nested: true}),
       new TodoList(),
       new Link(),
       new Strike(),

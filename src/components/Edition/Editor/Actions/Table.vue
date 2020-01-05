@@ -28,19 +28,19 @@
 
         <v-list dense>
           <v-list-item @click="commands.addRowBefore()">
-            <v-icon class="mr-3">mdi-table-row-plus-before</v-icon>
+            <v-icon left>mdi-table-row-plus-before</v-icon>
             {{ $t(`edition.editor.actions.table.add.rowBefore`) }}
           </v-list-item>
           <v-list-item @click="commands.addRowAfter()">
-            <v-icon class="mr-3">mdi-table-row-plus-after</v-icon>
+            <v-icon left>mdi-table-row-plus-after</v-icon>
             {{ $t(`edition.editor.actions.table.add.rowAfter`) }}
           </v-list-item>
           <v-list-item @click="commands.addColumnBefore()">
-            <v-icon class="mr-3">mdi-table-column-plus-before</v-icon>
+            <v-icon left>mdi-table-column-plus-before</v-icon>
             {{ $t(`edition.editor.actions.table.add.columnBefore`) }}
           </v-list-item>
           <v-list-item @click="commands.addColumnAfter()">
-            <v-icon class="mr-3">mdi-table-column-plus-after</v-icon>
+            <v-icon left>mdi-table-column-plus-after</v-icon>
             {{ $t(`edition.editor.actions.table.add.columnAfter`) }}
           </v-list-item>
         </v-list>
@@ -55,11 +55,11 @@
 
         <v-list dense>
           <v-list-item @click="commands.deleteRow()">
-            <v-icon class="mr-3">mdi-table-row-remove</v-icon>
+            <v-icon left>mdi-table-row-remove</v-icon>
             {{ $t(`edition.editor.actions.table.remove.row`) }}
           </v-list-item>
           <v-list-item @click="commands.deleteColumn()">
-            <v-icon class="mr-3">mdi-table-column-remove</v-icon>
+            <v-icon left>mdi-table-column-remove</v-icon>
             {{ $t(`edition.editor.actions.table.remove.column`) }}
           </v-list-item>
         </v-list>

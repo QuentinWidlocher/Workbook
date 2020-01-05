@@ -27,6 +27,7 @@
             :label="$t(`edition.editor.actions.${name}.fieldName`)"
             color="primary"
             clearable
+            prepend-icon="mdi-link-variant"
             hide-details
             :disabled="!!imgSrc"
             v-model="url"

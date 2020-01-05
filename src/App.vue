@@ -1,7 +1,10 @@
 <template>
   <v-app>
     <v-app-bar app dense color="primary" dark>
-      <v-toolbar-title>Workbook</v-toolbar-title>
+      <v-toolbar-title>
+        <v-icon left>mdi-notebook</v-icon>
+        Workbook
+      </v-toolbar-title>
     </v-app-bar>
 
     <v-content>

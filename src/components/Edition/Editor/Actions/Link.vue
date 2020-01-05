@@ -26,6 +26,7 @@
           <v-text-field
             :label="$t(`edition.editor.actions.${name}.fieldName`)"
             color="primary"
+            prepend-icon="mdi-link-variant"
             clearable
             hide-details
             v-model="link"
