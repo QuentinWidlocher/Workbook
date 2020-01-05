@@ -4,8 +4,7 @@ export default class Variable {
 
   public get value(): string {
     if (!this._value) {
-      const localValue = localStorage.getItem(this.name);
-      this.value = localValue ? localValue : "";
+      this.value = localStorage.getItem(this.name) || "";
     }
     return this._value;
   }

@@ -1,0 +1,157 @@
+#Editor {
+
+    .action-buttons {
+        min-width: 28px;
+        padding: 5px;
+    }
+
+    .v-card {
+        height: 100%;
+
+        .v-card__text {
+            --extended: 1;
+            height: calc(100% - (48px * var(--extended)));
+        }
+    }
+
+    #content {
+        outline: none !important;
+        transition: all 2s;
+        overflow: auto !important;
+        height: 100%;
+        padding: 0;
+
+        .ProseMirror {
+
+            height: calc(100% - 20px);
+
+            &.resize-cursor {
+                cursor: col-resize;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                margin: 10px 0 20px !important;
+            }
+            
+            blockquote {
+                border-left: .25em solid #dfe2e5;
+                color: #6a737d;
+                padding-left: 1em;
+                margin: 20px 0 !important;
+            }
+            
+            code {
+                padding: 0 4px !important;
+                margin: 0 5px !important;
+            }
+            
+            pre code {
+                padding: 8px !important;
+                margin: 0 5px !important;
+            }
+            
+            code:before,
+            code:after {
+                content: none !important;
+                letter-spacing: initial !important;
+            }
+
+            table {
+                max-width: 100%;
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                margin: 0;
+                overflow: hidden;
+                    
+
+                td {
+                    min-width: 1rem;
+                    border: 2px solid #ddd;
+                    padding: 3px 5px;
+                    vertical-align: top;
+                    -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+                    position: relative;
+
+                    &.selectedCell {
+                        background-color: var(--v-primary-base);
+                        opacity: 0.1;
+                    }
+                }
+            }
+
+            img {
+                max-width: 100%;
+                object-fit: cover;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            p {
+                margin-top: 16px !important;
+                margin-bottom: 16px !important;
+                min-height: 1rem;
+                display: flex;
+            }
+
+            ul[data-type="todo_list"] {
+                padding-left: 0;
+            }
+
+            li[data-type="todo_item"] {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .todo-checkbox {
+                margin-right: 10px;
+                user-select: none;
+                -webkit-user-select: none;
+                cursor: pointer;
+
+                &::before {
+                    content: "\F131";
+                    font: normal normal normal 24px/1 "Material Design Icons";
+                }
+            }
+
+            .todo-content {
+                flex: 1;
+
+                >p {
+                    margin: 0 !important;
+
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+
+                >ul[data-type="todo_list"] {
+                    margin: .5rem 0;
+                }
+            }
+
+            li[data-done="true"] {
+                >.todo-content {
+                    >p {
+                        text-decoration: line-through;
+                    }
+                }
+
+                >.todo-checkbox::before {
+                    content: "\FC2E";
+                    color: var(--v-primary-base);
+                    font: normal normal normal 24px/1 "Material Design Icons";
+                }
+            }
+
+            li[data-done="false"] {
+                text-decoration: none;
+            }
+        }
+    }
+}

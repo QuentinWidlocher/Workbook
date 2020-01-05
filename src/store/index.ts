@@ -22,9 +22,9 @@ export default new Vuex.Store({
       const entryIndex = state.entries.findIndex(
         (entryInList: Entry) => entryInList === entry
       );
-      state.entries.splice(entryIndex,1);
+      state.entries.splice(entryIndex, 1);
     },
-    editEntry(state: any, edits: { entry: Entry, edits: any }) {
+    editEntry(state: any, edits: { entry: Entry; edits: any }) {
       const entryIndex = state.entries.findIndex(
         (entryInList: Entry) => entryInList === edits.entry
       );
@@ -33,11 +33,11 @@ export default new Vuex.Store({
       }
     },
     deleteEntryByIndex(state: any, index: number) {
-      state.entries.splice(index,1);
+      state.entries.splice(index, 1);
     },
     changeEntryIndex(state: any, index: number) {
       state.currentEntryIndex = index;
-    },
+    }
   },
   actions: {},
   modules: {}

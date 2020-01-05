@@ -1,7 +1,59 @@
 {
-    "editor": {
-        "description": {
-            "label": "Description"
+    "edition": {
+        "editor": {
+            "actions": {
+                "bold": "Gras",
+                "italic": "Italique",
+                "underline": "Souligné",
+                "strike": "Barré",
+                "code": "Code",
+                "heading": "Titres",
+                "link": {
+                    "name": "Ajouter un lien",
+                    "fieldName": "Lien",
+                    "validate": "Modifier le lien",
+                    "clear": "Effacer le lien",
+                    "cancel": "Annuler"
+                },
+                "image": {
+                    "name": "Ajouter une image",
+                    "fieldName": "Indiquez l'URL de l'image",
+                    "or": "OU",
+                    "dragndrop": "Cliquez pour ajouter une image ou glissez la ici",
+                    "delete": "Supprimer l'image",
+                    "validate": "Ajouter l'image",
+                    "cancel": "Annuler"
+                },
+                "table": {
+                    "add" : { 
+                        "table" : "Ajouter un tableau" ,
+                        "rowBefore": "Ajouter en haut",
+                        "rowAfter": "Ajouter en bas",
+                        "columnBefore": "Ajouter en gauche",
+                        "columnAfter": "Ajouter en droite"
+                    },
+                    "remove" : { 
+                        "table" : "Supprimer le tableau",
+                        "row": "Supprimer la ligne",
+                        "column": "Supprimer la colonne"
+                    },
+                    "delete": {
+                        "title": "Attention !",
+                        "content": "Vous allez supprimer le tableau entier. <br> Êtes vous certain de vouloir le supprimer ?",
+                        "delete": "Supprimer le tableau",
+                        "cancel": "Annuler"
+                    },
+                    "merge" : "Fusionner les cellules"
+                },
+                "blockquote": "Citation",
+                "picture": "Ajouter une image",
+                "horizontal_rule": "Ajouter un trait de séparation",
+                "bullet_list": "Liste à points",
+                "ordered_list": "Liste numérotée",
+                "todo_list": "Liste à cocher",
+                "seeMore": "Voir plus d'actions",
+                "seeLess": "Voir moins d'actions"
+            }
         },
         "title": {
             "label": "Titre"
@@ -12,7 +64,7 @@
                 "title": "Attention !",
                 "description": "Vous allez supprimer l'entrée \"{title}\" ! Cette action est <strong class=\"font-weight-bold\">IRRÉVERSIBLE</strong>. <br> Êtes vous certain de vouloir la supprimer ?",
                 "confirm": "Supprimer l'entrée",
-                "cancel": "Revenir en arrière"
+                "cancel": "Annuler"
             }
         }
     },

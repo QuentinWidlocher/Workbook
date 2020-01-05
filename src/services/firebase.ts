@@ -27,6 +27,7 @@ export class FirebaseService {
     this.storage = firebase.storage().ref();
 
     this.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    this.db.enablePersistence();
   }
 
   public getCurrentUser(): Promise<any> {
