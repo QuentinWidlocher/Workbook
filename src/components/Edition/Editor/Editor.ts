@@ -105,7 +105,7 @@ export default class Editor extends Vue {
       new Strike(),
       new History(),
       new HorizontalRule(),
-      // new HardBreak(),
+      new HardBreak(),
       new Image(),
       new Table({ resizable: true }),
       new TableHeader(),
