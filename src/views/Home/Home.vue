@@ -1,7 +1,17 @@
 <template>
   <v-row>
     <v-col class="col-entry-list" :cols="3">
-      <EntryList></EntryList>
+      <EntryList :entries="entries" @select="selectEntry"/>
+      <v-btn 
+        depressed
+        block
+        color="primary" 
+        @click="addEntry()" 
+        class="mt-3"
+      >
+        {{ $t("entryList.actions.addEntry") }}
+      </v-btn>
+
     </v-col>
 
     <v-col class="col-editor" :cols="9">
