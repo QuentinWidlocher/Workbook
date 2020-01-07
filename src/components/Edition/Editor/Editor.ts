@@ -24,21 +24,23 @@ import {
   TableCell,
   TableRow,
 } from "tiptap-extensions";
-import BoldAction from "./Actions/Bold.vue";
-import ItalicAction from "./Actions/Italic.vue";
-import UnderlineAction from "./Actions/Underline.vue";
-import SpacerAction from "./Actions/Spacer.vue";
-import HeadingsAction from "./Actions/Headings.vue";
-import LinkAction from "./Actions/Link.vue";
-import CodeAction from "./Actions/Code.vue";
-import StrikeAction from "./Actions/Strike.vue";
-import QuoteAction from "./Actions/Quote.vue";
-import RuleAction from "./Actions/Rule.vue";
-import BulletListAction from "./Actions/BulletList.vue";
-import OrderedListAction from "./Actions/OrderedList.vue";
-import TodoListAction from "./Actions/TodoList.vue";
-import ImageAction from "./Actions/Image.vue";
-import TableAction from "./Actions/Table.vue";
+import { 
+  BoldAction,
+  ItalicAction,
+  UnderlineAction,
+  SpacerAction,
+  HeadingsAction,
+  LinkAction,
+  CodeAction,
+  StrikeAction,
+  QuoteAction,
+  RuleAction,
+  BulletListAction,
+  OrderedListAction,
+  TodoListAction,
+  ImageAction,
+  TableAction,
+ } from "./Actions";
 
 @Component({
   components: {
@@ -103,7 +105,7 @@ export default class Editor extends Vue {
       new Strike(),
       new History(),
       new HorizontalRule(),
-      new HardBreak(),
+      // new HardBreak(),
       new Image(),
       new Table({ resizable: true }),
       new TableHeader(),

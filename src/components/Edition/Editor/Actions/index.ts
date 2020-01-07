@@ -1,0 +1,15 @@
+export { default as BoldAction } from "./Bold.vue";
+export { default as ItalicAction } from "./Italic.vue";
+export { default as UnderlineAction } from "./Underline.vue";
+export { default as SpacerAction } from "./Spacer.vue";
+export { default as HeadingsAction } from "./Headings.vue";
+export { default as LinkAction } from "./Link.vue";
+export { default as CodeAction } from "./Code.vue";
+export { default as StrikeAction } from "./Strike.vue";
+export { default as QuoteAction } from "./Quote.vue";
+export { default as RuleAction } from "./Rule.vue";
+export { default as BulletListAction } from "./BulletList.vue";
+export { default as OrderedListAction } from "./OrderedList.vue";
+export { default as TodoListAction } from "./TodoList.vue";
+export { default as ImageAction } from "./Image.vue";
+export { default as TableAction } from "./Table.vue";
