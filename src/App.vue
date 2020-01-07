@@ -5,6 +5,14 @@
         <v-icon left>mdi-notebook</v-icon>
         Workbook
       </v-toolbar-title>
+      <v-spacer/>
+      <v-btn
+        icon
+        :loading="saveSpinner"
+        @click="save"
+      >
+        <v-icon>mdi-content-save</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-content>

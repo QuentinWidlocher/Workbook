@@ -3,6 +3,7 @@ import { firebaseService } from "./firebase";
 import EntryMapper from "@/mappers/EntryMapper";
 import store from "@/store";
 import { globalVariables } from "./globalVariables";
+import { savingSpinner } from "@/services/savingSpinner";
 
 export class EntriesService {
   public initializeEntries() {
@@ -32,12 +33,18 @@ export class EntriesService {
 
   public saveEntry(entry: Entry) {
     if (!entry) return;
+    savingSpinner.startSpinning();
     firebaseService.db
       .collection("users")
       .doc(globalVariables.userId.value)
       .collection("entries")
       .doc(entry.id)
-      .set(EntryMapper.toDocument(entry));
+      .set(EntryMapper.toDocument(entry))
+      .then(() => { savingSpinner.stopSpinning() });
+  }
+
+  public saveCurrentEntry() {
+    this.saveEntry(this.currentEntry);
   }
 
   public addEntry(entry: Entry) {
