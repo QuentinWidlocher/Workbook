@@ -13,7 +13,7 @@
             entry.title ?
               entry.title :
                 entry.id ? 
-                  $t("entryList.labels.emptyEntry") : 
+                  $t("entryList.labels.emptyEntryTitle") : 
                   $t("entryList.labels.newEntry")
           }}</v-list-item-title>
         </v-list-item-content>

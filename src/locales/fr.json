@@ -71,7 +71,8 @@
     "entryList": {
         "labels": {
             "newEntry": "Nouvelle entrée",
-            "emptyEntry": "L'entrée ne peux pas être vide"
+            "emptyEntry": "L'entrée ne peux pas être vide",
+            "emptyEntryTitle": "L'entrée doit avoir un titre"
         },
         "actions": {
             "addEntry": "Ajouter une entrée"

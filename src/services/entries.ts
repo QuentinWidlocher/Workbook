@@ -41,8 +41,18 @@ export class EntriesService {
   }
 
   // If originalEntry is passed, saving only occurs when objects are different
-  public saveEntry(entry: Entry, originalEntry?: Entry): Promise<Entry> {
+  public saveEntry(entry: Entry, originalEntry?: Entry, create: boolean = false): Promise<Entry> {
     if (!entry) return Promise.reject({ fatal: true, text: 'Entry is empty' });
+    if (!globalVariables.userId.value) return Promise.reject({ fatal: true, text: 'User id is not specified'});
+    if (!entry.title) return Promise.reject({ fatal: true, text: 'Entry title is empty'});
+
+    if (!entry.id) {
+      if (create) {
+        return this.createEntry(entry);
+      } else {
+        return Promise.reject({ fatal: false, text: 'Entry is not yet created, it cannot be saved' });
+      }
+    }
 
     if (originalEntry && _.isEqual(Object.assign({}, this.currentEntry), originalEntry)) {
       return Promise.reject({ fatal: false, text: 'Objects are identical, no need to save'});
@@ -58,11 +68,14 @@ export class EntriesService {
       .then(() => { 
         savingSpinner.stopSpinning();
         return entry;
+      }).catch((e) => {
+        savingSpinner.stopSpinning();
+        return e;
       });
   }
 
-  public saveCurrentEntry(originalEntry?: Entry): Promise<Entry> {
-    return this.saveEntry(this.currentEntry, originalEntry);
+  public saveCurrentEntry(originalEntry?: Entry, create: boolean = false): Promise<Entry> {
+    return this.saveEntry(this.currentEntry, originalEntry, create);
   }
 
   public addEntry(entry: Entry): Promise<Entry> {
