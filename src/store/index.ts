@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     entries: Array<Entry>(),
-    currentEntryIndex: 0
+    currentEntryIndex: -1
   },
   getters: {
     currentEntry: (state: any) => {

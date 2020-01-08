@@ -16,6 +16,12 @@
 
     <v-col class="col-editor" :cols="9">
       <Edition></Edition>
+      <div class="empty-zone" v-if="!currentEntry">
+        <div class="ma-auto d-flex flex-column align-center">
+          <v-icon color="primary" size="200">mdi-notebook</v-icon>
+          <h1 class="display-2 font-weight-light primary--text">Workbook</h1>
+        </div>
+      </div>
     </v-col>
   </v-row>
 </template>

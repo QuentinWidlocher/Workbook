@@ -17,9 +17,7 @@ export default class Home extends Vue {
   public originalCurrentEntry!: Entry; // to compare changes
 
   private mounted() {
-    entries.initializeEntries().then(() => {
-      this.originalCurrentEntry = Object.assign({}, this.currentEntry);
-    });
+    entries.initializeEntries();
     this.initializeAutosaving();
   }
 
