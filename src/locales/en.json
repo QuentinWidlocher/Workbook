@@ -1,28 +1,80 @@
 {
-  "editor": {
-    "description": {
-      "label": "Description"
+  "edition": {
+    "editor": {
+      "actions": {
+        "bold": "Bold",
+        "italic": "Italic",
+        "underline": "Underlined",
+        "strike": "Striked",
+        "code": "Code",
+        "heading": "Headings",
+        "link": {
+          "name": "Add a link",
+          "fieldName": "Link",
+          "validate": "Edit link",
+          "clear": "Clear link",
+          "cancel": "Cancel"
+        },
+        "image": {
+          "name": "Add an image",
+          "fieldName": "Enter image URL",
+          "or": "OR",
+          "dragndrop": "Click to add an image, or drag it here",
+          "delete": "Delete image",
+          "validate": "Add image",
+          "cancel": "Cancel"
+        },
+        "table": {
+          "add": {
+            "table": "Add a table",
+            "rowBefore": "Add to top",
+            "rowAfter": "Add to bottom",
+            "columnBefore": "Add to left",
+            "columnAfter": "Add to right"
+          },
+          "remove": {
+            "table": "Remove the table",
+            "row": "Delete the row",
+            "column": "Delete the column"
+          },
+          "delete": {
+            "title": "Warning !",
+            "content": "You are about to delete the entire table. <br> Are you sure you want to remove the it ?",
+            "delete": "Delete the table",
+            "cancel": "Cancel"
+          },
+          "merge": "Merge selected cells"
+        },
+        "blockquote": "Quote",
+        "horizontal_rule": "Add an horizontal rule",
+        "bullet_list": "Bullet list",
+        "ordered_list": "Numbered list",
+        "todo_list": "Checklist",
+        "seeMore": "See more actions",
+        "seeLess": "See less actions"
+      }
     },
     "title": {
       "label": "Title"
     },
     "actions": {
       "delete": {
-        "button": "Delete entry",
+        "button": "Delete the entry",
         "title": "Warning !",
-        "description": "You are about to delete this entry \"{title}\" ! This action is <strong class=\"font-weight-bold\">IRREVERSIBLE</strong>. <br> Do you want to delete it anyway ?",
+        "description": "You are about to delete the entry \"{title}\" ! This action is <strong class=\"font-weight-bold\">IRREVERSIBLE</strong>. <br> Are you sure you want to delete it ?",
         "confirm": "Delete the entry",
-        "cancel": "Go back"
+        "cancel": "Cancel"
       }
     }
   },
   "entryList": {
     "labels": {
       "newEntry": "New entry",
-      "emptyEntry": "Entry cannot be empty"
+      "emptyEntry": "Entry cannot be empty",
+      "emptyEntryTitle": "Entry must have a title"
     },
     "actions": {
-      "addEntry": "Add entry"
+      "addEntry": "Add an entry"
     }
   }
 }
