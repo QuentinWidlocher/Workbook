@@ -7,7 +7,7 @@
         block
         color="primary" 
         @click="addEntry()" 
-        class="mt-3"
+        class="btn-add mt-3"
       >
         {{ $t("entryList.actions.addEntry") }}
       </v-btn>

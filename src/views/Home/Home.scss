@@ -3,3 +3,16 @@
 .col-editor {
     height: 100%;
 }
+
+#EntryList {
+    flex: 1;
+}
+
+.col-entry-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-add {
+    flex: initial;
+}

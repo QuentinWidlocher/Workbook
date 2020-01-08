@@ -1,14 +1,8 @@
-// #EntryList {
-//     height: 100%;
-//     display: flex;
-//     flex-direction: column;
+#EntryList {
+    overflow-y: auto;
+    height: 100%;
 
-//     .v-list {
-//         overflow-y: auto;
-//         flex: 1;
-//     }
-
-//     .v-btn {
-//         flex: initial;
-//     }
-// }
+    .v-list {
+        height: 100%
+    }
+}
