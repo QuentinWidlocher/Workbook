@@ -2,9 +2,9 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import Entry from "@/models/entry";
 import Edition from "@/components/Edition/Edition.vue";
 import EntryList from "@/components/EntryList/EntryList.vue";
-import store from "@/store";
-import { entriesService as entries } from "@/services/entries";
+import { entriesService as entries, entriesService } from "@/services/entries";
 import { globalVariables } from '@/services/globalVariables';
+import _ from "lodash";
 
 @Component({
   components: {
@@ -13,8 +13,13 @@ import { globalVariables } from '@/services/globalVariables';
   }
 })
 export default class Home extends Vue {
+
+  public originalCurrentEntry!: Entry; // to compare changes
+
   private mounted() {
-    entries.initializeEntries();
+    entries.initializeEntries().then(() => {
+      this.originalCurrentEntry = Object.assign({}, this.currentEntry);
+    });
     this.initializeAutosaving();
   }
 
@@ -65,11 +70,12 @@ export default class Home extends Vue {
         // ... and is correct
 
         // We save the current entry
-        entries.saveEntry(entries.currentEntry);
+        entries.saveCurrentEntry(this.originalCurrentEntry).catch(() => { });
       }
     }
 
     entries.currentEntryIndex = index;
+    this.originalCurrentEntry = Object.assign({}, this.currentEntry);
   }
 
   private cancelCreation() {
@@ -78,19 +84,23 @@ export default class Home extends Vue {
 
   private initializeAutosaving() {
     window.addEventListener('beforeunload', (e: Event) => {
-      entries.saveCurrentEntry();
+      entries.saveCurrentEntry(this.originalCurrentEntry).catch(() => {});
     })
 
     setInterval(() => {
-      entries.saveCurrentEntry();
+        entries.saveCurrentEntry(this.originalCurrentEntry).then(() => {
+          // The new original entry is the now edited current entry 
+          this.originalCurrentEntry = Object.assign({}, this.currentEntry);
+        }).catch(() => { });
+
     }, globalVariables.autosaveInterval.numberValue);
   }
 
   private get entries(): Entry[] {
-    return store.state.entries;
+    return entries.entries;
   }
 
   private get currentEntry(): Entry {
-    return store.getters.currentEntry;
+    return entries.currentEntry;
   }
 }

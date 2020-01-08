@@ -32,6 +32,9 @@ export default new Vuex.Store({
         Object.assign(state.entries[entryIndex], edits.edits);
       }
     },
+    setEntries(state: any, entries: Entry[]) {
+      state.entries = entries;
+    },
     deleteEntryByIndex(state: any, index: number) {
       state.entries.splice(index, 1);
     },
