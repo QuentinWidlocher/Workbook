@@ -1,47 +1,22 @@
 import Vue from "vue";
-import Vuex, { Mutation } from "vuex";
+import Vuex, { MutationTree, StoreOptions } from "vuex";
 import Entry from "@/models/entry";
+import { RootState } from './type';
+import state from './state';
+import mutations from './mutations';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-    entries: Array<Entry>(),
-    currentEntryIndex: -1
-  },
+const store: StoreOptions<RootState> = {
+  state: state,
   getters: {
     currentEntry: (state: any) => {
       return state.entries[state.currentEntryIndex];
     }
   },
-  mutations: {
-    addEntry(state: any, entry: Entry) {
-      state.entries.push(entry);
-    },
-    deleteEntry(state: any, entry: Entry) {
-      const entryIndex = state.entries.findIndex(
-        (entryInList: Entry) => entryInList === entry
-      );
-      state.entries.splice(entryIndex, 1);
-    },
-    editEntry(state: any, edits: { entry: Entry; edits: any }) {
-      const entryIndex = state.entries.findIndex(
-        (entryInList: Entry) => entryInList === edits.entry
-      );
-      if (entryIndex >= 0) {
-        Object.assign(state.entries[entryIndex], edits.edits);
-      }
-    },
-    setEntries(state: any, entries: Entry[]) {
-      state.entries = entries;
-    },
-    deleteEntryByIndex(state: any, index: number) {
-      state.entries.splice(index, 1);
-    },
-    changeEntryIndex(state: any, index: number) {
-      state.currentEntryIndex = index;
-    }
-  },
+  mutations: mutations,
   actions: {},
   modules: {}
-});
+}
+
+export default new Vuex.Store<RootState>(store);
