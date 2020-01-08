@@ -9,6 +9,7 @@
         @click="addEntry()" 
         class="btn-add mt-3"
       >
+        <v-icon left>mdi-plus</v-icon>
         {{ $t("entryList.actions.addEntry") }}
       </v-btn>
 

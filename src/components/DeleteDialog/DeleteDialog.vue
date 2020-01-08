@@ -17,8 +17,10 @@
             color="error"
             class="mr-auto"
             @click="onDeleteConfirm()"
-            >{{ deleteButtonLabel }}</v-btn
           >
+            <v-icon left>mdi-delete-forever</v-icon>
+            {{ deleteButtonLabel }}
+          </v-btn>
 
           <v-btn 
             depressed 

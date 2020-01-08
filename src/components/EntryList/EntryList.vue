@@ -15,7 +15,9 @@
                 entry.id ? 
                   $t("entryList.labels.emptyEntryTitle") : 
                   $t("entryList.labels.newEntry")
-          }}</v-list-item-title>
+          }}
+          <v-icon small v-if="!entry.id && !entry.title">mdi-alert-decagram</v-icon>
+          </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
