@@ -67,6 +67,7 @@ export class EntriesService {
       .set(EntryMapper.toDocument(entry))
       .then(() => { 
         savingSpinner.stopSpinning();
+        savingSpinner.pending = false;
         return entry;
       }).catch((e) => {
         savingSpinner.stopSpinning();

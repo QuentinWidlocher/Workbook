@@ -11,7 +11,11 @@
         :loading="saveSpinner"
         @click="save"
       >
-        <v-icon>mdi-content-save</v-icon>
+        <v-icon>{{
+          savePending ?
+          'mdi-content-save-alert' :
+          'mdi-content-save'
+          }}</v-icon>
       </v-btn>
     </v-app-bar>
 

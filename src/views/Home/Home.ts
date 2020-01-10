@@ -5,6 +5,7 @@ import EntryList from "@/components/EntryList/EntryList.vue";
 import { entriesService as entries, entriesService } from "@/services/entries";
 import { globalVariables } from '@/services/globalVariables';
 import _ from "lodash";
+import { savingSpinner } from '@/services/savingSpinner';
 
 @Component({
   components: {
@@ -92,6 +93,14 @@ export default class Home extends Vue {
         }).catch(() => { });
 
     }, globalVariables.autosaveInterval.numberValue);
+  }
+
+  @Watch('currentEntry.description')
+  @Watch('currentEntry.title')
+  private onCurrentEntryChange() {
+    if (!_.isEqual(Object.assign({}, this.currentEntry), this.originalCurrentEntry)) {
+      savingSpinner.pending = true;
+    }
   }
 
   private get entries(): Entry[] {

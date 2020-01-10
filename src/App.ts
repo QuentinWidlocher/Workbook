@@ -5,9 +5,12 @@ import { savingSpinner } from './services/savingSpinner';
 @Component
 export default class App extends Vue {
     private saveSpinner: boolean = false;
+    private savePending: boolean = false;
+    private test = savingSpinner.pending_;
 
     mounted() {
         savingSpinner.onSpinChange((state) => { this.saveSpinner = state });
+        savingSpinner.onPendingChange((state) => { this.savePending = state });
     }
 
     private save() {
