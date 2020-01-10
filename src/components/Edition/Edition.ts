@@ -3,6 +3,8 @@ import Entry from "@/models/entry";
 import { entriesService as entries } from "@/services/entries";
 import Editor from "./Editor/Editor.vue";
 import DeleteDialog from "@/components/DeleteDialog/DeleteDialog.vue";
+import { State2Way } from 'vuex-class-state2way';
+import { Getter } from 'vuex-class';
 
 @Component({
   components: {
@@ -11,13 +13,10 @@ import DeleteDialog from "@/components/DeleteDialog/DeleteDialog.vue";
 })
 export default class Edition extends Vue {
   private deleteDialog: boolean = false;
+  @Getter('currentEntry') entry!: Entry;
 
   private deleteEntry() {
     entries.deleteEntry(entries.currentEntry);
     this.deleteDialog = false;
-  }
-
-  private get entry(): Entry {
-    return entries.currentEntry;
   }
 }

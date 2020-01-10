@@ -6,6 +6,8 @@ import { entriesService as entries, entriesService } from "@/services/entries";
 import { globalVariables } from '@/services/globalVariables';
 import _ from "lodash";
 import { savingSpinner } from '@/services/savingSpinner';
+import { State, Getter } from 'vuex-class';
+import { State2Way } from 'vuex-class-state2way';
 
 @Component({
   components: {
@@ -17,6 +19,10 @@ export default class Home extends Vue {
 
   public originalCurrentEntry!: Entry; // to compare changes
 
+  @State2Way('changeEntryIndex', 'currentEntryIndex') currentEntryIndex!: number;
+  @State entries!: Entry[];
+  @Getter currentEntry!: Entry;
+
   private mounted() {
     entries.initializeEntries();
     this.initializeAutosaving();
@@ -24,29 +30,29 @@ export default class Home extends Vue {
 
   private addEntry() {
     // We prevent the user from adding the entry if he's already creating one
-    if ( entries.currentEntry && !entries.currentEntry.id && !entries.currentEntry.title) {
+    if ( this.currentEntry && !this.currentEntry.id && !this.currentEntry.title) {
       return;
     }
 
     // We add an empty entry
     entries.addEntry({ title: "", description: "" });
 
-    if (entries.currentEntryIndex < 0) entries.currentEntryIndex = 0;
+    if (this.currentEntryIndex < 0) this.currentEntryIndex = 0;
 
     // We select it
-    this.selectEntry(entries.entries.length - 1);
+    this.selectEntry(this.entries.length - 1);
   }
 
   private selectEntry(index: number) {
-    if (index === entries.currentEntryIndex) return;
+    if (index === this.currentEntryIndex) return;
 
-    if (entries.currentEntryIndex < 0) {
-      entries.currentEntryIndex = index;
+    if (this.currentEntryIndex < 0) {
+      this.currentEntryIndex = index;
     }
 
-    if (!entries.currentEntry.id) {
+    if (!this.currentEntry.id) {
       // if the entry has just been added...
-      if (!entries.currentEntry.title) {
+      if (!this.currentEntry.title) {
         // ... and is empty
 
         // We cancel the creation of the entry
@@ -55,12 +61,12 @@ export default class Home extends Vue {
         // ...and is correct
 
         // We create the entry
-        entries.createEntry(entries.currentEntry);
+        entries.createEntry(this.currentEntry);
       }
     } else {
       // If the entry already existed...
 
-      if (!entries.currentEntry.title) {
+      if (!this.currentEntry.title) {
         // ... and is empty
 
         // We prevent the user from opening another one
@@ -73,12 +79,12 @@ export default class Home extends Vue {
       }
     }
 
-    entries.currentEntryIndex = index;
+    this.currentEntryIndex = index;
     this.originalCurrentEntry = Object.assign({}, this.currentEntry);
   }
 
   private cancelCreation() {
-    entries.deleteEntry(entries.currentEntry);
+    entries.deleteEntry(this.currentEntry);
   }
 
   private initializeAutosaving() {
@@ -103,11 +109,4 @@ export default class Home extends Vue {
     }
   }
 
-  private get entries(): Entry[] {
-    return entries.entries;
-  }
-
-  private get currentEntry(): Entry {
-    return entries.currentEntry;
-  }
 }

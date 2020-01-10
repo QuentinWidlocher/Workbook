@@ -1,16 +1,13 @@
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
-import { entriesService as entries, entriesService } from "@/services/entries";
 import Entry from "@/models/entry";
+import { State } from 'vuex-class';
 
 @Component
 export default class EntryList extends Vue {
   @Prop({default:[]}) entries!: Entry[];
+  @State currentEntryIndex!: number;
 
   private selectEntry(index: number) {
     this.$emit('select', index);
-  }
-
-  private get currentEntryIndex(): number {
-    return entriesService.currentEntryIndex;
   }
 }
