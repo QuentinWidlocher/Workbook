@@ -130,14 +130,19 @@ export default class Home extends Vue {
   @Watch('currentEntry.description')
   @Watch('currentEntry.title')
   private onCurrentEntryChange() {
-    if (!_.isEqual(Object.assign({}, this.currentEntry), this.originalCurrentEntry)) {
+    if (this.currentEntry && !_.isEqual(Object.assign({}, this.currentEntry), this.originalCurrentEntry)) {
       savingSpinner.pending = true;
     }
   }
 
   private search(criterias: SearchCriterias) {
     this.entries = criterias.filter(this.originalEntries);
-    this.criterias = criterias;
+
+    if (criterias.isDefault()) {
+      // If the search is triggered but nothing changed,
+      // the user has pressed close so we cancel the search
+      this.searchOpened = false;
+    }
   }
 
 }

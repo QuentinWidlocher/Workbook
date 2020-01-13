@@ -8,6 +8,7 @@
                     dense
                     hide-details
                     v-model="criterias.terms"
+                    @keypress.enter="search()"
                 >
                     <template #label>
                         <v-icon>mdi-magnify</v-icon>
