@@ -75,7 +75,31 @@
             "emptyEntryTitle": "L'entrée doit avoir un titre"
         },
         "actions": {
-            "addEntry": "Ajouter une entrée"
+            "addEntry": "Ajouter une entrée",
+            "openSearch": "Rechercher",
+            "editSearch": "Editer"
+        }
+    },
+    "search": {
+        "search": "Recherchez une entrée",
+        "criterias": {
+            "searchIn": {
+                "title": "Rechercher dans le titre",
+                "description": "Rechercher dans la description"
+            },
+            "dates": {
+                "searchByDates": "Chercher par date",
+                "format": "JJ/MM/AAAA",
+                "creationDateBefore": "Créé avant le",
+                "creationDateAfter": "Créé après le",
+                "editionDateBefore": "Édité avant le",
+                "editionDateAfter": "Édité après le"
+            },
+            "matchCase": "Respecter la casse"
+        },
+        "actions": {
+            "clearSearch": "Effacer la recherche",
+            "search": "Rechercher"
         }
     }
 }

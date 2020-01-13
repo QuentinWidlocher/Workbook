@@ -74,7 +74,21 @@
       "emptyEntryTitle": "Entry must have a title"
     },
     "actions": {
-      "addEntry": "Add an entry"
+      "addEntry": "Add an entry",
+      "openSearch": "Search"
+    }
+  },
+  "search": {
+    "search": "Search",
+    "criterias": {
+      "searchIn": {
+        "title": "Search in title",
+        "description": "Search in description"
+      }
+    },
+    "actions": {
+      "clearSearch": "Clear search",
+      "search": "Search"
     }
   }
 }

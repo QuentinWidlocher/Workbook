@@ -23,6 +23,8 @@ export class EntriesService {
           store.commit("addEntry", entry);
         });
 
+        store.commit('setOriginalEntries', entries);
+
         return entries;
       });
   }

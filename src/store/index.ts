@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex, { MutationTree, StoreOptions } from "vuex";
-import Entry from "@/models/entry";
-import { RootState } from './type';
+import { RootState } from './state';
 import state from './state';
 import mutations from './mutations';
 

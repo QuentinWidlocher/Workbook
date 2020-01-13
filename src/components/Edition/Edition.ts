@@ -3,7 +3,6 @@ import Entry from "@/models/entry";
 import { entriesService as entries } from "@/services/entries";
 import Editor from "./Editor/Editor.vue";
 import DeleteDialog from "@/components/DeleteDialog/DeleteDialog.vue";
-import { State2Way } from 'vuex-class-state2way';
 import { Getter } from 'vuex-class';
 
 @Component({

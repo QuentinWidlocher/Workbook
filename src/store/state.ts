@@ -1,8 +1,14 @@
 import Entry from '@/models/entry';
-import { RootState } from './type';
+
+export interface RootState {
+    entries: Entry[];
+    originalEntries: Entry[];
+    currentEntryIndex: number;
+}
 
 const state: RootState = {
     entries: [],
+    originalEntries: [],
     currentEntryIndex: -1
 }
 

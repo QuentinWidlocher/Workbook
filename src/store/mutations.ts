@@ -1,5 +1,5 @@
 import { MutationTree } from 'vuex';
-import { RootState } from './type';
+import { RootState } from './state';
 import Entry from '@/models/entry';
 
 const mutations: MutationTree<RootState> = {
@@ -22,6 +22,9 @@ const mutations: MutationTree<RootState> = {
     },
     setEntries(state: any, entries: Entry[]) {
         state.entries = entries;
+    },
+    setOriginalEntries(state: any, entries: Entry[]) {
+        state.originalEntries = entries;
     },
     deleteEntryByIndex(state: any, index: number) {
         state.entries.splice(index, 1);

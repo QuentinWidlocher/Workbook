@@ -8,11 +8,14 @@ import _ from "lodash";
 import { savingSpinner } from '@/services/savingSpinner';
 import { State, Getter } from 'vuex-class';
 import { State2Way } from 'vuex-class-state2way';
+import Search from "@/components/Search/Search.vue";
+import SearchCriterias from '@/models/searchCriterias';
 
 @Component({
   components: {
     Edition,
-    EntryList
+    EntryList,
+    Search
   }
 })
 export default class Home extends Vue {
@@ -20,8 +23,13 @@ export default class Home extends Vue {
   public originalCurrentEntry!: Entry; // to compare changes
 
   @State2Way('changeEntryIndex', 'currentEntryIndex') currentEntryIndex!: number;
-  @State entries!: Entry[];
+  @State2Way('setEntries', 'entries') entries!: Entry[];
+  @State originalEntries!: Entry[];
   @Getter currentEntry!: Entry;
+
+  criterias: SearchCriterias = new SearchCriterias();
+
+  searchOpened: boolean = false;
 
   private mounted() {
     entries.initializeEntries();
@@ -44,6 +52,24 @@ export default class Home extends Vue {
   }
 
   private selectEntry(index: number) {
+    if (this.searchOpened) {
+      this.selectEntrySearch(index);
+    } else {
+      this.selectEntryEdition(index);
+    }
+  }
+
+  private selectEntrySearch(index: number) {
+    this.searchOpened = false;
+    this.currentEntryIndex = index;
+  }
+
+  private openSearch() {
+    this.currentEntryIndex = -1;
+    this.searchOpened = true;
+  }
+
+  private selectEntryEdition(index: number) {
     if (index === this.currentEntryIndex) return;
 
     if (this.currentEntryIndex < 0) {
@@ -107,6 +133,11 @@ export default class Home extends Vue {
     if (!_.isEqual(Object.assign({}, this.currentEntry), this.originalCurrentEntry)) {
       savingSpinner.pending = true;
     }
+  }
+
+  private search(criterias: SearchCriterias) {
+    this.entries = criterias.filter(this.originalEntries);
+    this.criterias = criterias;
   }
 
 }
