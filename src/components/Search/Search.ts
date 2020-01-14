@@ -1,10 +1,10 @@
-import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 import SearchCriterias from '@/models/searchCriterias';
 import { globalVariables } from "@/services/globalVariables";
 
 @Component
 export default class Search extends Vue {
-    criterias: SearchCriterias = new SearchCriterias();
+    @Prop({ default: new SearchCriterias() }) criterias!: SearchCriterias
 
     showCreationDateBefore: boolean = false;
     showCreationDateAfter: boolean = false;
@@ -33,7 +33,7 @@ export default class Search extends Vue {
     }
 
     private clearSearch() {
-        this.criterias = new SearchCriterias();
+        this.criterias.setToDefault();
         this.search(true);
     }
 

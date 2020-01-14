@@ -24,6 +24,19 @@ export default class SearchCriterias {
         !this.matchCategories
     }
 
+    public setToDefault() {
+        this.terms = undefined;
+        this.matchCase = false;
+        this.searchInTitle = true;
+        this.searchInDescription = false;
+        this.editionDateBefore = undefined;
+        this.editionDateAfter = undefined;
+        this.creationDateBefore = undefined;
+        this.creationDateAfter = undefined;
+        this.matchCategories = undefined;
+        this.sort = globalVariables.sort.value;
+    }
+
     public filter(entries: Entry[]): Entry[] {
         let filtredEntries: Entry[] = entries;
 
