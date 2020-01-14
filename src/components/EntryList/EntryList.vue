@@ -20,6 +20,8 @@
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+
+      <v-skeleton-loader v-if="loading" type="list-item@10"></v-skeleton-loader>
     </v-list>
   </div>
 </template>

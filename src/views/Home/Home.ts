@@ -28,15 +28,18 @@ export default class Home extends Vue {
   @State originalEntries!: Entry[];
   @Getter currentEntry!: Entry;
 
-  criterias: SearchCriterias = new SearchCriterias();
+  listLoading: boolean = true;
 
+  criterias: SearchCriterias = new SearchCriterias();
   searchOpened: boolean = false;
 
   private mounted() {
     loadingSpinner.startSpinning();
+    this.listLoading = true;
     entries.initializeEntries().finally(() => {
       this.entries = this.criterias.doSort(this.entries);
       loadingSpinner.stopSpinning();
+      this.listLoading = false;
     });
     this.initializeAutosaving();
   }

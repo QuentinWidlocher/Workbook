@@ -27,7 +27,7 @@
           </v-btn>
         </v-slide-y-transition>
 
-        <EntryList :entries="entries" @select="selectEntry"/>
+        <EntryList :entries="entries" :loading="listLoading" @select="selectEntry"/>
 
         <v-slide-y-reverse-transition>
           <v-btn 
