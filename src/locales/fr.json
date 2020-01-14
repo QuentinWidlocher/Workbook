@@ -97,6 +97,12 @@
             },
             "matchCase": "Respecter la casse"
         },
+        "sorts": {
+            "sort": "Trier",
+            "alphabetical": "Ordre alphabétique",
+            "creationDate": "Date de création",
+            "editionDate": "Date d'édition"
+        },
         "actions": {
             "clearSearch": "Effacer la recherche",
             "search": "Rechercher"

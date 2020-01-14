@@ -1,4 +1,5 @@
 import Entry from './entry';
+import { globalVariables } from '@/services/globalVariables';
 
 export default class SearchCriterias {
     terms?: string;
@@ -10,6 +11,8 @@ export default class SearchCriterias {
     creationDateBefore?: Date;
     creationDateAfter?: Date;
     matchCategories?: string[];
+
+    sort: string = globalVariables.sort.value;
 
     public isDefault() {
         return !this.terms &&
@@ -51,5 +54,14 @@ export default class SearchCriterias {
         }
 
         return filtredEntries;
+    }
+
+    public doSort(entries: Entry[]) {
+        return entries.sort((a: Entry, b: Entry) => {
+            if (this.sort === 'alphabetical') {
+                return a.title.localeCompare(b.title);
+            }
+            return 0;
+        })
     }
 }

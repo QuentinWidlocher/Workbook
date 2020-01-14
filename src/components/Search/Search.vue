@@ -46,7 +46,6 @@
                 />
             </v-col>
 
-
             <v-col v-if="false" :cols="12">
                 <v-expansion-panels flat>
                     <v-expansion-panel>
@@ -179,6 +178,20 @@
                         </v-expansion-panel-content>
                     </v-expansion-panel>
                 </v-expansion-panels>
+            </v-col>
+
+            <v-col :cols="6">
+            </v-col>
+            <v-col :cols="6">
+                <v-select
+                    :label="$t('search.sorts.sort')"
+                    prepend-inner-icon="mdi-sort"
+                    outlined
+                    dense
+                    @change="sortSelectChange"
+                    v-model="criterias.sort"
+                    :items="sortValues"
+                />
             </v-col>
 
         </v-row>

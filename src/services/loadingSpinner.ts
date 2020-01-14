@@ -18,7 +18,6 @@ export class LoadingSpinner extends Vue {
     }
 
     private emitSpinning() {
-        console.log(this.spinning ? 'spin to win' : 'hol\'up');
         this.$emit('loadingSpinnerSpinChange', this.spinning);
     }
     

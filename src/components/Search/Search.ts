@@ -1,8 +1,6 @@
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
-import { State2Way } from 'vuex-class-state2way';
-import Entry from '@/models/entry';
-import { State } from 'vuex-class';
 import SearchCriterias from '@/models/searchCriterias';
+import { globalVariables } from "@/services/globalVariables";
 
 @Component
 export default class Search extends Vue {
@@ -12,6 +10,18 @@ export default class Search extends Vue {
     showCreationDateAfter: boolean = false;
     showEditionDateBefore: boolean = false;
     showEditionDateAfter: boolean = false;
+
+    public get sortValues(): {value: string, text: string}[] {
+        return [
+            { value: 'alphabetical', text: this.$t('search.sorts.alphabetical').toString()},
+            // { value: 'creationDate', text: this.$t('search.sorts.creationDate').toString() },
+            // { value: 'editionDate', text: this.$t('search.sorts.editionDate').toString() },
+        ]
+    }
+
+    private sortSelectChange(value: any) {
+        globalVariables.sort.value = value;
+    }
 
     private search() {
         this.$emit('search', this.criterias);

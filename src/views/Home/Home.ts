@@ -35,6 +35,7 @@ export default class Home extends Vue {
   private mounted() {
     loadingSpinner.startSpinning();
     entries.initializeEntries().finally(() => {
+      this.entries = this.criterias.doSort(this.entries);
       loadingSpinner.stopSpinning();
     });
     this.initializeAutosaving();
@@ -141,6 +142,7 @@ export default class Home extends Vue {
 
   private search(criterias: SearchCriterias) {
     this.entries = criterias.filter(this.originalEntries);
+    this.entries = criterias.doSort(this.entries);
 
     if (criterias.isDefault()) {
       // If the search is triggered but nothing changed,

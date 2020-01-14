@@ -11,13 +11,11 @@ export default class App extends Vue {
     private showLoadingSpinner: boolean = true;
 
     mounted() {
-        console.log('App loaded first');
         savingSpinner.onSpinChange((state) => { this.saveSpinner = state });
         savingSpinner.onPendingChange((state) => { this.savePending = state });
 
         loadingSpinner.onSpinChange((state) => { 
             this.showLoadingSpinner = state 
-            console.log('local spin', this.showLoadingSpinner);
         });
     }
 
