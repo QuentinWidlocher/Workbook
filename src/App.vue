@@ -24,6 +24,11 @@
         <router-view :key="$route.fullPath"></router-view>
       </v-container>
     </v-content>
+
+    <v-overlay :value="showLoadingSpinner" color="primary">
+      <v-progress-circular indeterminate color="white"></v-progress-circular>
+    </v-overlay>
+
   </v-app>
 </template>
 <style lang="scss" src="./App.scss" scoped></style>

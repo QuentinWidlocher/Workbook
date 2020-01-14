@@ -4,6 +4,7 @@ import EntryMapper from "@/mappers/EntryMapper";
 import store from "@/store";
 import { globalVariables } from "./globalVariables";
 import { savingSpinner } from "@/services/savingSpinner";
+import { loadingSpinner } from "@/services/loadingSpinner";
 import _ from 'lodash';
 
 export class EntriesService {
@@ -24,7 +25,6 @@ export class EntriesService {
         });
 
         store.commit('setOriginalEntries', entries);
-
         return entries;
       });
   }

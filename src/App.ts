@@ -1,16 +1,24 @@
 import { Component, Vue } from "vue-property-decorator";
 import { entriesService } from './services/entries';
 import { savingSpinner } from './services/savingSpinner';
+import { loadingSpinner } from './services/loadingSpinner';
 
 @Component
 export default class App extends Vue {
     private saveSpinner: boolean = false;
     private savePending: boolean = false;
-    private test = savingSpinner.pending_;
+
+    private showLoadingSpinner: boolean = true;
 
     mounted() {
+        console.log('App loaded first');
         savingSpinner.onSpinChange((state) => { this.saveSpinner = state });
         savingSpinner.onPendingChange((state) => { this.savePending = state });
+
+        loadingSpinner.onSpinChange((state) => { 
+            this.showLoadingSpinner = state 
+            console.log('local spin', this.showLoadingSpinner);
+        });
     }
 
     private save() {

@@ -10,6 +10,7 @@ import { State, Getter } from 'vuex-class';
 import { State2Way } from 'vuex-class-state2way';
 import Search from "@/components/Search/Search.vue";
 import SearchCriterias from '@/models/searchCriterias';
+import { loadingSpinner } from '@/services/loadingSpinner';
 
 @Component({
   components: {
@@ -32,7 +33,10 @@ export default class Home extends Vue {
   searchOpened: boolean = false;
 
   private mounted() {
-    entries.initializeEntries();
+    loadingSpinner.startSpinning();
+    entries.initializeEntries().finally(() => {
+      loadingSpinner.stopSpinning();
+    });
     this.initializeAutosaving();
   }
 
