@@ -23,14 +23,18 @@ export default class Search extends Vue {
         globalVariables.sort.value = value;
     }
 
-    private search() {
+    private search(close: boolean = false) {
         this.$emit('search', this.criterias);
-        this.$emit('update:criterias', this.criterias)
+        this.$emit('update:criterias', this.criterias);
+
+        if (close) {
+            this.$emit('close');
+        }
     }
 
     private clearSearch() {
         this.criterias = new SearchCriterias();
-        this.search();
+        this.search(true);
     }
 
 }

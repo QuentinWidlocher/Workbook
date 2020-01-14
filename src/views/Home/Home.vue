@@ -3,7 +3,7 @@
     
       <v-slide-x-transition leave-absolute>
         <v-col class="col-search" v-if="searchOpened" :cols="9">
-          <Search @search="search" :criterias.sync="criterias"/>
+          <Search @search="search" @close="searchOpened = false" :criterias.sync="criterias"/>
         </v-col>
       </v-slide-x-transition>
 

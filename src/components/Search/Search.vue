@@ -8,7 +8,7 @@
                     dense
                     hide-details
                     v-model="criterias.terms"
-                    @keypress.enter="search()"
+                    @keypress.enter="search(true)"
                 >
                     <template #label>
                         <v-icon>mdi-magnify</v-icon>
@@ -210,7 +210,7 @@
                 <v-btn
                     color="primary"
                     depressed
-                    @click="search"
+                    @click="search(false)"
                 >
                     <v-icon left>mdi-magnify</v-icon>
                     {{$t('search.actions.search')}}

@@ -143,12 +143,6 @@ export default class Home extends Vue {
   private search(criterias: SearchCriterias) {
     this.entries = criterias.filter(this.originalEntries);
     this.entries = criterias.doSort(this.entries);
-
-    if (criterias.isDefault()) {
-      // If the search is triggered but nothing changed,
-      // the user has pressed close so we cancel the search
-      this.searchOpened = false;
-    }
   }
 
 }
