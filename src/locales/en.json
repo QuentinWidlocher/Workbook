@@ -79,12 +79,27 @@
     }
   },
   "search": {
-    "search": "Search",
+    "search": "Search for an entry",
     "criterias": {
       "searchIn": {
         "title": "Search in title",
         "description": "Search in description"
-      }
+      },
+      "dates": {
+        "searchByDates": "Search by date",
+        "format": "MM-DD-AAAA",
+        "creationDateBefore": "Created before",
+        "creationDateAfter": "Created after",
+        "editionDateBefore": "Edited before",
+        "editionDateAfter": "Edited after"
+      },
+      "matchCase": "Match case"
+    },
+    "sorts": {
+      "sort": "Sort",
+      "alphabetical": "Alphabetical",
+      "creationDate": "Creation date",
+      "editionDate": "Edition date"
     },
     "actions": {
       "clearSearch": "Clear search",
