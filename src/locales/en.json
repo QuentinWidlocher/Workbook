@@ -105,5 +105,24 @@
       "clearSearch": "Clear search",
       "search": "Search"
     }
+  },
+  "settings": {
+    "general": {
+      "label": "General settings",
+      "autosave": "Auto-save",
+      "autosaveInterval": "Auto-save interval",
+      "language": "Application language"
+    },
+    "theme": {
+      "label": "Application theme",
+      "darkMode": "Dark mode",
+      "themeColor": "Application color"
+    },
+    "actions": {
+      "goBack": "Go back",
+      "clearPreferences": "Clear preferences",
+      "deleteAll": "Delete all",
+      "changeAccount": "Switch account"
+    }
   }
 }
