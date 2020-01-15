@@ -46,4 +46,8 @@ export default class Variable {
     this._value = JSON.stringify(value);
     localStorage.setItem(this.name, this._value);
   }
+
+  public setToDefault() {
+    this.value = this.default;
+  }
 }

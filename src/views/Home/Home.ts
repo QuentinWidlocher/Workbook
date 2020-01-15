@@ -34,6 +34,7 @@ export default class Home extends Vue {
   searchOpened: boolean = false;
 
   private mounted() {
+    console.log('Home mounted');
     loadingSpinner.startSpinning();
     this.listLoading = true;
     entries.initializeEntries().finally(() => {
@@ -127,11 +128,12 @@ export default class Home extends Vue {
     })
 
     setInterval(() => {
-        entries.saveCurrentEntry(this.originalCurrentEntry).then(() => {
-          // The new original entry is the now edited current entry 
-          this.originalCurrentEntry = Object.assign({}, this.currentEntry);
-        }).catch(() => { });
-
+        if (globalVariables.autosave.booleanValue) {
+          entries.saveCurrentEntry(this.originalCurrentEntry).then(() => {
+            // The new original entry is the now edited current entry 
+            this.originalCurrentEntry = Object.assign({}, this.currentEntry);
+          }).catch(() => { });
+        }
     }, globalVariables.autosaveInterval.numberValue);
   }
 

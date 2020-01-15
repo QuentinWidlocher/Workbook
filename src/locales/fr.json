@@ -107,5 +107,24 @@
             "clearSearch": "Effacer la recherche",
             "search": "Rechercher"
         }
+    },
+    "settings": {
+        "general": {
+            "label": "Paramètres généraux",
+            "autosave": "Sauvegarde automatique",
+            "autosaveInterval": "Interval de sauvegarde automatique",
+            "language": "Langue de l'application"
+        },
+        "theme": {
+            "label": "Thème de l'application",
+            "darkMode": "Mode sombre",
+            "themeColor": "Couleur de l'application"
+        },
+        "actions": {
+            "goBack": "Retour",
+            "clearPreferences": "Effacer les préférences",
+            "deleteAll": "Tout supprimer",
+            "changeAccount": "Changer de compte"
+        }
     }
 }

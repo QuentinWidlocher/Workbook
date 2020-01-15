@@ -8,6 +8,12 @@
       <v-spacer/>
       <v-btn
         icon
+        :to="{name: 'settings'}"
+      >
+        <v-icon>mdi-settings</v-icon>
+      </v-btn>
+      <v-btn
+        icon
         :loading="saveSpinner"
         @click="save"
       >
@@ -21,7 +27,11 @@
 
     <v-content>
       <v-container>
-        <router-view :key="$route.fullPath"></router-view>
+        <transition name="fade" mode="out-in">
+          <keep-alive>
+            <router-view :key="$route.fullPath"></router-view>
+          </keep-alive>
+        </transition>
       </v-container>
     </v-content>
 
