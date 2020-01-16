@@ -9,6 +9,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
+    "@mdi/font": "^4.7.95",
     "@types/lodash": "^4.14.149",
     "@types/md5": "^2.1.33",
     "@types/mime-types": "^2.1.0",
