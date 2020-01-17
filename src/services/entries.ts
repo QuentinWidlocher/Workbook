@@ -56,7 +56,7 @@ export class EntriesService {
       }
     }
 
-    if (originalEntry && _.isEqual(Object.assign({}, this.currentEntry), originalEntry)) {
+    if (originalEntry && _.isEqual(_.cloneDeep(this.currentEntry), originalEntry)) {
       return Promise.reject({ fatal: false, text: 'Objects are identical, no need to save'});
     }
 
@@ -70,6 +70,7 @@ export class EntriesService {
       .then(() => { 
         savingSpinner.stopSpinning();
         savingSpinner.pending = false;
+        store.commit('mergeOriginalEntries', this.entries);
         return entry;
       }).catch((e) => {
         savingSpinner.stopSpinning();
@@ -102,6 +103,7 @@ export class EntriesService {
         .delete()
         .then(() => {
           store.commit("deleteEntry", entry);
+          store.commit("deleteOriginalEntry", entry);
           this.currentEntryIndex = -1;
           return entry;
         });

@@ -10,9 +10,9 @@
 
     <v-row class="mt-3 btn-line" dense justify="end">
       <v-col cols="auto">
-        <v-btn color="primary" depressed outlined @click="categoriesDialog = true">{{
-          $t("edition.actions.categories.button")
-        }}</v-btn>
+        <v-btn color="primary" depressed outlined @click="categoriesDialog = true">
+          <v-icon left>mdi-tag-multiple</v-icon>
+          {{ $t("edition.actions.categories.button") }}</v-btn>
       </v-col>
 
       <v-col cols="auto">
@@ -26,7 +26,6 @@
       v-model="categoriesDialog"
       :items="categories"
       :selectedItems="entry.categories"
-      @confirm="setCategories"
     />
 
     <DeleteDialog

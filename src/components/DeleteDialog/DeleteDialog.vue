@@ -11,16 +11,18 @@
             "
           ></p>
         </v-card-text>
+        <v-divider/>
         <v-card-actions>
           <v-btn
             depressed
             color="error"
-            class="mr-auto"
             @click="onDeleteConfirm()"
           >
             <v-icon left>mdi-delete-forever</v-icon>
             {{ deleteButtonLabel }}
           </v-btn>
+
+          <v-spacer/>
 
           <v-btn 
             depressed 

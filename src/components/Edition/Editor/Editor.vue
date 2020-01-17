@@ -5,7 +5,7 @@
         :editor="editor"
         v-slot="{ commands, isActive, getMarkAttrs }"
       >
-        <v-toolbar flat dense class="grey lighten-4">
+        <v-toolbar flat dense :class="{'grey lighten-4': $vuetify.dark, 'grey darken-4': !$vuetify.dark}">
           <component
             v-for="(button, i) in topRowButtons"
             :key="`btn-${i}-${button}`"

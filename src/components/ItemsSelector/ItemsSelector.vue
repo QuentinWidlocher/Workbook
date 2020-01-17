@@ -1,14 +1,15 @@
 <template>
   <div id="ItemsSelector">
-    <v-container class="py-0">
+    <v-container class="pa-0">
       <v-row
         align="center"
         justify="start"
+        class="px-2"
       >
         <v-col
           v-for="(selection, i) in selectedItems"
           :key="selection"
-          class="shrink"
+          class="shrink pa-1"
         >
           <v-chip
             close
@@ -18,7 +19,7 @@
           </v-chip>
         </v-col>
 
-        <v-col v-if="!allSelected" cols="12">
+        <v-col v-if="!allSelected" cols="12" class="px-1">
           <v-text-field
             v-model="search"
             outlined
@@ -35,7 +36,7 @@
       </v-row>
     </v-container>
 
-    <v-list dense>
+    <v-list v-if="!allSelected">
       <template v-for="(item, i) in filteredItems">
         <v-list-item
           v-if="!selectedItems.includes(item)"
@@ -44,7 +45,7 @@
         >
           <v-list-item-title>{{ item }}</v-list-item-title>
           <v-list-item-action v-if="deletion">
-            <v-btn icon small @click.native.stop="deleteItem(item)">
+            <v-btn icon @click.native.stop="deleteItem(item)">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </v-list-item-action>
@@ -59,7 +60,7 @@
           dense
           clearable
           hide-details
-          append-outer-icon="mdi-plus"
+          append-outer-icon="mdi-tag-plus"
           @click:append-outer="addItem"
           @keypress.enter="addItem"
         >

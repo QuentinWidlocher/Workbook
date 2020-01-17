@@ -10,11 +10,13 @@ export class CategoriesService {
       this.categories = [];
       const newCategories: string[] = [];
       entriesService.entries.forEach((entry: Entry) => {
-        entry.categories.forEach((category: string) => {
-          if (!newCategories.includes(category)) {
-            newCategories.push(category);
-          }
-        })
+        if (entry.categories) {
+          entry.categories.forEach((category: string) => {
+            if (!newCategories.includes(category)) {
+              newCategories.push(category);
+            }
+          });
+        }
       });
       this.categories = newCategories;
       rslv(newCategories);

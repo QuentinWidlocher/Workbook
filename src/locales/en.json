@@ -68,7 +68,7 @@
       "categories": {
         "button": "Edit categories",
         "cancel": "Cancel",
-        "confirm": "Return"
+        "confirm": "Confirm"
       }
     }
   },
@@ -80,6 +80,7 @@
     },
     "actions": {
       "addEntry": "Add an entry",
+      "editSearch": "Edit search",
       "openSearch": "Search"
     }
   },

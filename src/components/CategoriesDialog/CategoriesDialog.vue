@@ -7,6 +7,8 @@
           :selectedItems.sync="selectedItems"
           :creation="true"
           :deletion="true"
+          class="mx-3"
+          :class="{'pt-2': !!selectedItems.length}"
         />  
 
         <v-divider />
@@ -14,14 +16,6 @@
         <v-card-actions>
 
           <v-spacer></v-spacer>
-
-          <v-btn 
-            depressed 
-            color="error" 
-            outlined
-            @click="onCancel()">
-            {{$t('edition.actions.categories.cancel')}}
-          </v-btn>
 
           <v-btn 
             depressed 

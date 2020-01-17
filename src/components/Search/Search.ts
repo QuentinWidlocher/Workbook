@@ -1,8 +1,14 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import SearchCriterias from '@/models/searchCriterias';
 import { globalVariables } from "@/services/globalVariables";
+import { State } from 'vuex-class';
+import ItemsSelector from "@/components/ItemsSelector/ItemsSelector.vue";
 
-@Component
+@Component({
+    components: {
+        ItemsSelector
+    }
+})
 export default class Search extends Vue {
     @Prop({ default: new SearchCriterias() }) criterias!: SearchCriterias
 
@@ -10,6 +16,8 @@ export default class Search extends Vue {
     showCreationDateAfter: boolean = false;
     showEditionDateBefore: boolean = false;
     showEditionDateAfter: boolean = false;
+
+    @State categories!: string[];
 
     public get sortValues(): {value: string, text: string}[] {
         return [

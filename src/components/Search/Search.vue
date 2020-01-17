@@ -36,7 +36,7 @@
                 />
             </v-col>
 
-            <v-col :cols="6">
+            <v-col :cols="12">
                 <v-checkbox
                     color="primary"
                     class="mt-0"
@@ -181,8 +181,14 @@
             </v-col>
 
             <v-col :cols="6">
+
+                <ItemsSelector
+                    :items="categories"
+                    :selectedItems.sync="criterias.matchCategories"
+                /> 
+
             </v-col>
-            <v-col :cols="6">
+            <v-col :cols="6" class="mt-3">
                 <v-select
                     :label="$t('search.sorts.sort')"
                     prepend-inner-icon="mdi-sort"

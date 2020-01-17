@@ -8,18 +8,13 @@ import ItemsSelector from "@/components/ItemsSelector/ItemsSelector.vue";
 })
 export default class CategoriesDialog extends Vue {
     @Prop({ default: false }) value!: boolean;
-    @Prop({ default: []}) items!: string[];
-    @Prop({ default: []}) selectedItems!: string[];
+    @Prop({ default: () => []}) items!: string[];
+    @Prop({ default: () => []}) selectedItems!: string[];
     
     value_: boolean = this.value;
     selections: number[] = [];
 
     onConfirm() {
-        this.$emit('confirm', this.selections);
-        this.value_ = false;
-    }
-
-    onCancel() {
         this.value_ = false;
     }
 

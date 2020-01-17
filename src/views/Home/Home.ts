@@ -80,6 +80,13 @@ export default class Home extends Vue {
     this.searchOpened = true;
   }
 
+  private closeSearch() {
+    this.searchOpened = false;
+    if (this.entries.length === 1) {
+      this.selectEntryEdition(0);
+    }
+  }
+
   private selectEntryEdition(index: number) {
     if (index === this.currentEntryIndex) return;
 
@@ -99,6 +106,7 @@ export default class Home extends Vue {
 
         // We create the entry
         entries.createEntry(this.currentEntry);
+        this.criterias.doSort(this.entries);
       }
     } else {
       // If the entry already existed...
@@ -117,7 +125,7 @@ export default class Home extends Vue {
     }
 
     this.currentEntryIndex = index;
-    this.originalCurrentEntry = Object.assign({}, this.currentEntry);
+    this.originalCurrentEntry =  _.cloneDeep(this.currentEntry);
   }
 
   private cancelCreation() {
@@ -133,7 +141,7 @@ export default class Home extends Vue {
         if (globalVariables.autosave.booleanValue) {
           entries.saveCurrentEntry(this.originalCurrentEntry).then(() => {
             // The new original entry is the now edited current entry 
-            this.originalCurrentEntry = Object.assign({}, this.currentEntry);
+            this.originalCurrentEntry = _.cloneDeep(this.currentEntry);
           }).catch(() => { });
         }
     }, globalVariables.autosaveInterval.numberValue);
@@ -141,8 +149,9 @@ export default class Home extends Vue {
 
   @Watch('currentEntry.description')
   @Watch('currentEntry.title')
+  @Watch('currentEntry.categories.length')
   private onCurrentEntryChange() {
-    if (this.currentEntry && !_.isEqual(Object.assign({}, this.currentEntry), this.originalCurrentEntry)) {
+    if (this.currentEntry && !_.isEqual(_.cloneDeep(this.currentEntry), this.originalCurrentEntry)) {
       savingSpinner.pending = true;
     }
   }

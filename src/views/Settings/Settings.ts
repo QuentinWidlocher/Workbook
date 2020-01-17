@@ -23,7 +23,6 @@ export default class Settings extends Vue {
         return globalVariables.themeColor.value;
     }
     private set themeColor(color: string) {
-        console.log(color)
         this.$vuetify.theme.currentTheme.primary = color;
         globalVariables.themeColor.value = color;
     }

@@ -66,6 +66,13 @@ export default class SearchCriterias {
             })
         }
 
+        if (this.matchCategories && this.matchCategories.length) {
+            filtredEntries = filtredEntries.filter((entry) => {
+                if (!entry.categories) return false;
+                return (entry.categories.some(c => this.matchCategories!.includes(c)))
+            })
+        }
+
         return filtredEntries;
     }
 

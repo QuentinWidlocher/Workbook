@@ -26,6 +26,22 @@ const mutations: MutationTree<RootState> = {
     setOriginalEntries(state: RootState, entries: Entry[]) {
         state.originalEntries = entries;
     },
+    deleteOriginalEntry(state: RootState, entry: Entry) {
+        const entryIndex = state.originalEntries.findIndex(
+            (entryInList: Entry) => entryInList === entry
+        );
+        state.originalEntries.splice(entryIndex, 1);
+    },
+    mergeOriginalEntries(state: RootState, entries: Entry[]) {
+        entries.forEach((entry: Entry) => {
+            const index = state.originalEntries.findIndex(c => c.id === entry.id);
+            if (index >= 0) {
+                state.originalEntries[index] = entry;
+            } else {
+                state.originalEntries.push(entry);
+            }
+        });
+    },
     deleteEntryByIndex(state: RootState, index: number) {
         state.entries.splice(index, 1);
     },

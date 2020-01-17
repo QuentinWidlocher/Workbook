@@ -18,15 +18,15 @@ export default class Edition extends Vue {
   private categoriesDialog: boolean = false;
 
   @Getter('currentEntry') entry!: Entry;
-  @State2Way('setCategories', 'categories') categories!: string[];
+  @State categories!: string[];
 
   private deleteEntry() {
     entries.deleteEntry(entries.currentEntry);
     this.deleteDialog = false;
   }
 
-  private setCategories(categories: string[]) {
-    this.entry.categories = categories;
-    categoriesService.mergeCategories(categories);
+  @Watch('categoriesDialog')
+  onCategoriesDialogChange() {
+    categoriesService.mergeCategories(this.categories);
   }
 }
