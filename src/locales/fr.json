@@ -65,6 +65,11 @@
                 "description": "Vous allez supprimer l'entrée \"{title}\" ! Cette action est <strong class=\"font-weight-bold\">IRRÉVERSIBLE</strong>. <br> Êtes vous certain de vouloir la supprimer ?",
                 "confirm": "Supprimer l'entrée",
                 "cancel": "Annuler"
+            },
+            "categories": {
+                "button": "Changer les catégories",
+                "cancel": "Annuler",
+                "confirm": "Retour"
             }
         }
     },
@@ -126,5 +131,10 @@
             "deleteAll": "Tout supprimer",
             "changeAccount": "Changer de compte"
         }
+    },
+    "itemsSelector": {
+        "search": "Rechercher une categorie",
+        "add": "Ajouter une catégorie",
+        "delete": "Supprimer la categorie"
     }
 }

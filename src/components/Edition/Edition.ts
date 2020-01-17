@@ -3,19 +3,30 @@ import Entry from "@/models/entry";
 import { entriesService as entries } from "@/services/entries";
 import Editor from "./Editor/Editor.vue";
 import DeleteDialog from "@/components/DeleteDialog/DeleteDialog.vue";
-import { Getter } from 'vuex-class';
+import CategoriesDialog from "@/components/CategoriesDialog/CategoriesDialog.vue";
+import { Getter, State } from 'vuex-class';
+import { State2Way } from 'vuex-class-state2way';
+import { categoriesService } from '@/services/categories';
 
 @Component({
   components: {
-    Editor, DeleteDialog
+    Editor, DeleteDialog, CategoriesDialog
   }
 })
 export default class Edition extends Vue {
   private deleteDialog: boolean = false;
+  private categoriesDialog: boolean = false;
+
   @Getter('currentEntry') entry!: Entry;
+  @State2Way('setCategories', 'categories') categories!: string[];
 
   private deleteEntry() {
     entries.deleteEntry(entries.currentEntry);
     this.deleteDialog = false;
+  }
+
+  private setCategories(categories: string[]) {
+    this.entry.categories = categories;
+    categoriesService.mergeCategories(categories);
   }
 }

@@ -10,6 +10,7 @@ export default class EntryMapper {
     entry.id = o.id;
     entry.title = data.title;
     entry.description = data.description;
+    entry.categories = data.categories;
 
     return entry;
   }
@@ -18,6 +19,9 @@ export default class EntryMapper {
     const document: any = Object.assign({}, o);
 
     delete document.id;
+    document.title = document.title || '';
+    document.description = document.description || '';
+    document.categories = document.categories || [];  
 
     return document;
   }

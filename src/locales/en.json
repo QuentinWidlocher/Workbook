@@ -64,6 +64,11 @@
         "description": "You are about to delete the entry \"{title}\" ! This action is <strong class=\"font-weight-bold\">IRREVERSIBLE</strong>. <br> Are you sure you want to delete it ?",
         "confirm": "Delete the entry",
         "cancel": "Cancel"
+      },
+      "categories": {
+        "button": "Edit categories",
+        "cancel": "Cancel",
+        "confirm": "Return"
       }
     }
   },
@@ -124,5 +129,10 @@
       "deleteAll": "Delete all",
       "changeAccount": "Switch account"
     }
+  },
+  "itemsSelector": {
+    "search": "Search for a category",
+    "delete": "Delete category",
+    "add": "Add category"
   }
 }

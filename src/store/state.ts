@@ -4,12 +4,14 @@ export interface RootState {
     entries: Entry[];
     originalEntries: Entry[];
     currentEntryIndex: number;
+    categories: string[];
 }
 
 const state: RootState = {
     entries: [],
     originalEntries: [],
-    currentEntryIndex: -1
+    currentEntryIndex: -1,
+    categories: []
 }
 
 export default state;

@@ -11,6 +11,7 @@ import { State2Way } from 'vuex-class-state2way';
 import Search from "@/components/Search/Search.vue";
 import SearchCriterias from '@/models/searchCriterias';
 import { loadingSpinner } from '@/services/loadingSpinner';
+import { categoriesService } from '@/services/categories';
 
 @Component({
   components: {
@@ -34,10 +35,11 @@ export default class Home extends Vue {
   searchOpened: boolean = false;
 
   private mounted() {
-    console.log('Home mounted');
     loadingSpinner.startSpinning();
     this.listLoading = true;
-    entries.initializeEntries().finally(() => {
+    entries.initializeEntries().then(() => {
+      return categoriesService.initializeCategories();
+    }).then(() => {
       this.entries = this.criterias.doSort(this.entries);
       loadingSpinner.stopSpinning();
       this.listLoading = false;
@@ -52,7 +54,7 @@ export default class Home extends Vue {
     }
 
     // We add an empty entry
-    entries.addEntry({ title: "", description: "" });
+    entries.addEntry(Entry.newEmpty());
 
     if (this.currentEntryIndex < 0) this.currentEntryIndex = 0;
 

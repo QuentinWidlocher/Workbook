@@ -8,11 +8,26 @@
 
     <Editor class="editor" v-model="entry.description" />
 
-    <div class="mt-3 d-flex justify-end">
-      <v-btn color="error" depressed outlined @click="deleteDialog = true">{{
-        $t("edition.actions.delete.button")
-      }}</v-btn>
-    </div>
+    <v-row class="mt-3 btn-line" dense justify="end">
+      <v-col cols="auto">
+        <v-btn color="primary" depressed outlined @click="categoriesDialog = true">{{
+          $t("edition.actions.categories.button")
+        }}</v-btn>
+      </v-col>
+
+      <v-col cols="auto">
+        <v-btn color="error" depressed outlined @click="deleteDialog = true">{{
+          $t("edition.actions.delete.button")
+        }}</v-btn>
+      </v-col>
+    </v-row>
+
+    <CategoriesDialog
+      v-model="categoriesDialog"
+      :items="categories"
+      :selectedItems="entry.categories"
+      @confirm="setCategories"
+    />
 
     <DeleteDialog
       v-model="deleteDialog"
@@ -21,7 +36,7 @@
       :deleteButtonLabel="$t('edition.actions.delete.confirm')"
       :cancelButtonLabel="$t('edition.actions.delete.cancel')"
       @confirm="deleteEntry"
-    ></DeleteDialog>
+    />
 
   </div>
 </template>
