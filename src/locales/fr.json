@@ -143,6 +143,7 @@
         "email": "Email",
         "password": "Mot de passe",
         "login": "Se connecter",
+        "loginAsAnon": "Se connecter en temps qu'invité",
         "errors": {
             "auth/too-many-requests": "Vous essayez de vous connecter trop vite, réessayez plus tard",
             "auth/user-disabled": "Votre compte est desactivé",
@@ -151,8 +152,7 @@
             "auth/network-request-failed": "Impossible de vous connecter, réessayez",
             "auth/invalid-email": "Votre email est incorrect",
             "auth/wrong-password": "Votre mot de passe est incorrect",
-            "login.errors.auth/wrong-password": "Votre mot de passe est incorrect",
-            "login.errors.auth/user-not-found ": "Cet email n'est pas utilisé"
+            "auth/user-not-found": "Cet email n'est pas utilisé"
         }
     }
 }

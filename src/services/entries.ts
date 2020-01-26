@@ -17,7 +17,7 @@ export class EntriesService {
 
         return firebaseService.db
             .collection('users')
-            .doc(globalVariables.userId)
+            .doc(globalVariables.user.id)
             .collection('entries')
             .get()
             .then((snapshot) => {
@@ -42,7 +42,7 @@ export class EntriesService {
 
         const doc = await firebaseService.db
             .collection('users')
-            .doc(globalVariables.userId)
+            .doc(globalVariables.user.id)
             .collection('entries')
             .add(EntryMapper.toDocument(entry));
         store.commit('editEntry', {
@@ -62,7 +62,7 @@ export class EntriesService {
             return Promise.reject();
         }
 
-        if (!globalVariables.userId) {
+        if (!globalVariables.user.id) {
             return Promise.reject({
                 fatal: true,
                 text: 'User id is not specified',
@@ -98,7 +98,7 @@ export class EntriesService {
         try {
             await firebaseService.db
                 .collection('users')
-                .doc(globalVariables.userId)
+                .doc(globalVariables.user.id)
                 .collection('entries')
                 .doc(entry.id)
                 .set(EntryMapper.toDocument(entry));
@@ -134,7 +134,7 @@ export class EntriesService {
         } else {
             await firebaseService.db
                 .collection('users')
-                .doc(globalVariables.userId)
+                .doc(globalVariables.user.id)
                 .collection('entries')
                 .doc(entry.id)
                 .delete();

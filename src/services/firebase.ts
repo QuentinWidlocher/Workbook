@@ -34,20 +34,24 @@ export class FirebaseService {
     public getCurrentUser(): firebase.User | null {
         const user = this.auth.currentUser;
         if (user) {
-            globalVariables.userId = user.uid;
-            this.getUserName().then((name: string) => (globalVariables.username = name));
+            globalVariables.user.id = user.uid;
+            this.getUserName().then((name: string) => (globalVariables.user.name = name));
         }
         return user;
     }
 
     public async getUserName(): Promise<string> {
-        return this.db
-            .collection('users')
-            .doc(globalVariables.userId)
-            .get()
-            .then((snap) => {
-                return (snap.data() as any).name;
-            });
+        if (globalVariables.user.isAnonymous) {
+            return 'Guest';
+        } else {
+            return this.db
+                .collection('users')
+                .doc(globalVariables.user.id)
+                .get()
+                .then((snap) => {
+                    return (snap.data() as any).name;
+                });
+        }
     }
 
     public isUserLoggedIn(): boolean {

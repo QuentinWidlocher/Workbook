@@ -2,14 +2,7 @@
     <div id="link-action">
         <v-tooltip top>
             <template v-slot:activator="{ on }">
-                <v-btn
-                    text
-                    small
-                    class="action-buttons"
-                    :input-value="active()"
-                    @click="onClick()"
-                    v-on="on"
-                >
+                <v-btn text small class="action-buttons" :input-value="active()" @click="onClick()" v-on="on">
                     <v-icon>mdi-{{ icon }}</v-icon>
                 </v-btn>
             </template>
@@ -19,9 +12,7 @@
 
         <v-dialog v-model="showDialog" max-width="500" eager>
             <v-card>
-                <v-card-title>{{
-                    $t(`edition.editor.actions.${name}.name`)
-                }}</v-card-title>
+                <v-card-title>{{ $t(`edition.editor.actions.${name}.name`) }}</v-card-title>
                 <v-card-text>
                     <v-text-field
                         :label="$t(`edition.editor.actions.${name}.fieldName`)"
@@ -33,10 +24,9 @@
                         v-model="url"
                     />
 
-                    <span
-                        class="text-center text-uppercase title mt-5 d-block w-100"
-                        >{{ $t(`edition.editor.actions.${name}.or`) }}</span
-                    >
+                    <span class="text-center text-uppercase title mt-5 d-block w-100">{{
+                        $t(`edition.editor.actions.${name}.or`)
+                    }}</span>
 
                     <div v-show="!imgSrc">
                         <input
@@ -45,18 +35,10 @@
                             type="file"
                             accept=".bmp,.jpg,.jpeg,.png,.gif,.webp"
                         />
-                        <label
-                            for="dragndrop-input"
-                            class="dragndrop mt-5"
-                            ref="dropzone"
-                        >
+                        <label for="dragndrop-input" class="dragndrop mt-5" ref="dropzone">
                             <v-icon class="icon">mdi-image-filter-hdr</v-icon>
                             <h3 class="text-center my-5">
-                                {{
-                                    $t(
-                                        `edition.editor.actions.${name}.dragndrop`
-                                    )
-                                }}
+                                {{ $t(`edition.editor.actions.${name}.dragndrop`) }}
                             </h3>
                         </label>
                     </div>
@@ -64,17 +46,9 @@
                         <v-hover v-model="imgHover">
                             <v-img :src="imgSrc" contain class="preview mt-5">
                                 <v-overlay absolute v-if="imgHover">
-                                    <v-btn
-                                        depressed
-                                        color="error"
-                                        @click="deleteImage"
-                                    >
+                                    <v-btn depressed color="error" @click="deleteImage">
                                         <v-icon>mdi-delete</v-icon>
-                                        {{
-                                            $t(
-                                                `edition.editor.actions.${name}.delete`
-                                            )
-                                        }}
+                                        {{ $t(`edition.editor.actions.${name}.delete`) }}
                                     </v-btn>
                                 </v-overlay>
                             </v-img>
@@ -82,21 +56,10 @@
                     </div>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn
-                        color="error"
-                        outlined
-                        depressed
-                        @click="closeDialog"
-                        class="ml-auto"
-                    >
+                    <v-btn color="error" outlined depressed @click="closeDialog" class="ml-auto">
                         {{ $t(`edition.editor.actions.${name}.cancel`) }}
                     </v-btn>
-                    <v-btn
-                        color="primary"
-                        depressed
-                        :loading="uploading"
-                        @click="addImage"
-                    >
+                    <v-btn color="primary" depressed :loading="uploading" @click="addImage">
                         {{ $t(`edition.editor.actions.${name}.validate`) }}
                     </v-btn>
                 </v-card-actions>
@@ -215,20 +178,14 @@ export default class ImageAction extends Action {
         if (this.imgSrc) {
             this.uploading = true;
 
-            const base64ArrayParts = this.imgSrc
-                .split(',')[0]
-                .match(/[^:\s*]\w+\/[\w-+\d.]+(?=[;| ])/);
+            const base64ArrayParts = this.imgSrc.split(',')[0].match(/[^:\s*]\w+\/[\w-+\d.]+(?=[;| ])/);
             if (!base64ArrayParts || !base64ArrayParts[0]) return;
 
             const extension = mime.extension(base64ArrayParts[0]);
 
             const storageRef = firebaseService.storage.storage
                 .ref()
-                .child(
-                    `${globalVariables.userId}/images/${md5(
-                        this.imgSrc
-                    )}.${extension}`
-                );
+                .child(`${globalVariables.user.id}/images/${md5(this.imgSrc)}.${extension}`);
 
             storageRef
                 .putString(this.imgSrc, 'data_url')
@@ -257,10 +214,7 @@ export default class ImageAction extends Action {
     }
 
     validateLink(link: string): boolean {
-        return (
-            !!link &&
-            !!link.match(/(https?|ftp):\/\/(-.)?([^\s/?.#-]+.?)+(\/[^\s]*)?$/i)
-        );
+        return !!link && !!link.match(/(https?|ftp):\/\/(-.)?([^\s/?.#-]+.?)+(\/[^\s]*)?$/i);
     }
 }
 </script>

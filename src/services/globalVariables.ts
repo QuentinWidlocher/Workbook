@@ -1,8 +1,13 @@
 import Variable from '@/models/variable';
 
+export class User {
+    id!: string;
+    name!: string;
+    isAnonymous: boolean = false;
+}
+
 export class GlobalVariables {
-    public userId: string = '';
-    public username: string = '';
+    public user: User = new User();
 
     public sort: Variable = new Variable('sort', 'alphabetical');
 

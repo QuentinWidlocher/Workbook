@@ -14,27 +14,27 @@ export default class Login extends Vue {
 
     private errorMessage: string = '';
 
-    private login() {
+    private async login(anonymous: boolean = false): Promise<void> {
         this.loading = true;
 
-        firebaseService.auth
-            .signInWithEmailAndPassword(this.username, this.password)
-            .then(async (credentials: firebase.auth.UserCredential) => {
-                globalVariables.userId = credentials.user!.uid;
-                router.push({ name: 'home' });
-                this.clearPage();
-            })
-            .catch((error: any) => {
-                this.loading = false;
-                this.errorMessage = `login.errors.${error.code}`;
-            });
-    }
+        let credentials: firebase.auth.UserCredential;
 
-    private clearPage() {
-        this.loading = false;
-        this.username = '';
-        this.password = '';
-        this.showPassword = false;
-        this.errorMessage = '';
+        try {
+            if (anonymous) {
+                credentials = await firebaseService.auth.signInAnonymously();
+                globalVariables.user.isAnonymous = true;
+            } else {
+                credentials = await firebaseService.auth.signInWithEmailAndPassword(
+                    this.username,
+                    this.password
+                );
+                globalVariables.user.id = credentials.user!.uid;
+                globalVariables.user.isAnonymous = false;
+            }
+            router.push({ name: 'home' });
+        } catch (error) {
+            this.loading = false;
+            this.errorMessage = `login.errors.${error.code}`;
+        }
     }
 }

@@ -7,7 +7,7 @@ import { entriesService } from '@/services/entries';
 @Component
 export default class Settings extends Vue {
     private get userName(): string {
-        return globalVariables.username;
+        return globalVariables.user.name;
     }
 
     private get darkMode(): boolean {

@@ -142,6 +142,7 @@
         "email": "Email",
         "password": "Password",
         "login": "Log in",
+        "loginAsAnon": "Log in as guest",
         "errors": {
             "auth/too-many-requests": "You tried to login too many time. Try again after some time",
             "auth/user-disabled": "Your account is disabled",
@@ -150,8 +151,7 @@
             "auth/network-request-failed": "Login failed, please try again",
             "auth/invalid-email": "Your email is not correct",
             "auth/wrong-password ": "Your password is not correct",
-            "login.errors.auth/wrong-password": "Your password is not correct",
-            "login.errors.auth/user-not-found ": "This email is not in use"
+            "auth/user-not-found": "This email is not in use"
         }
     }
 }

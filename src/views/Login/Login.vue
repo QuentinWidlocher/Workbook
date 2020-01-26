@@ -1,7 +1,11 @@
 <template>
     <div id="Login">
-        <form v-on:submit.prevent="login">
+        <form v-on:submit.prevent="login(false)">
             <h1>{{ $t('login.title') }}</h1>
+
+            <v-alert dense outlined type="error" v-if="errorMessage">
+                {{ $t(errorMessage) }}
+            </v-alert>
 
             <v-text-field v-model="username" :label="$t('login.email')"></v-text-field>
 
@@ -14,14 +18,17 @@
                 @click:append="showPassword = !showPassword"
             ></v-text-field>
 
-            <div class="bottom-row">
-                <v-alert dense outlined type="error" v-if="errorMessage">
-                    {{ $t(errorMessage) }}
-                </v-alert>
-                <v-btn depressed type="submit" :loading="loading" color="primary">
-                    <v-icon left>mdi-account-arrow-right</v-icon> {{ $t('login.login') }}
-                </v-btn>
-            </div>
+            <v-btn depressed block type="submit" :loading="loading" color="primary">
+                <v-icon left>mdi-account-arrow-right</v-icon>
+                {{ $t('login.login') }}
+            </v-btn>
+
+            <v-divider class="my-3" />
+
+            <v-btn outlined block color="primary" @click="login(true)">
+                <v-icon left>mdi-incognito</v-icon>
+                {{ $t('login.loginAsAnon') }}
+            </v-btn>
         </form>
     </div>
 </template>
