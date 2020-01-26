@@ -25,15 +25,15 @@
                     "cancel": "Annuler"
                 },
                 "table": {
-                    "add" : { 
-                        "table" : "Ajouter un tableau" ,
+                    "add": {
+                        "table": "Ajouter un tableau",
                         "rowBefore": "Ajouter en haut",
                         "rowAfter": "Ajouter en bas",
                         "columnBefore": "Ajouter en gauche",
                         "columnAfter": "Ajouter en droite"
                     },
-                    "remove" : { 
-                        "table" : "Supprimer le tableau",
+                    "remove": {
+                        "table": "Supprimer le tableau",
                         "row": "Supprimer la ligne",
                         "column": "Supprimer la colonne"
                     },
@@ -43,7 +43,7 @@
                         "delete": "Supprimer le tableau",
                         "cancel": "Annuler"
                     },
-                    "merge" : "Fusionner les cellules"
+                    "merge": "Fusionner les cellules"
                 },
                 "blockquote": "Citation",
                 "picture": "Ajouter une image",
@@ -114,6 +114,7 @@
         }
     },
     "settings": {
+        "welcome": "Soyez le bienvenue, {name}.",
         "general": {
             "label": "Paramètres généraux",
             "autosave": "Sauvegarde automatique",
@@ -129,12 +130,29 @@
             "goBack": "Retour",
             "clearPreferences": "Effacer les préférences",
             "deleteAll": "Tout supprimer",
-            "changeAccount": "Changer de compte"
+            "disconnect": "Se déconnecter"
         }
     },
     "itemsSelector": {
         "search": "Rechercher une categorie",
         "add": "Ajouter une catégorie",
         "delete": "Supprimer la categorie"
+    },
+    "login": {
+        "title": "Veuillez vous connecter",
+        "email": "Email",
+        "password": "Mot de passe",
+        "login": "Se connecter",
+        "errors": {
+            "auth/too-many-requests": "Vous essayez de vous connecter trop vite, réessayez plus tard",
+            "auth/user-disabled": "Votre compte est desactivé",
+            "auth/app-not-authorized": "Vous ne pouvez pas vous connecter depuis cette application",
+            "auth/invalid-user-token": "Connectez vous à nouveau",
+            "auth/network-request-failed": "Impossible de vous connecter, réessayez",
+            "auth/invalid-email": "Votre email est incorrect",
+            "auth/wrong-password": "Votre mot de passe est incorrect",
+            "login.errors.auth/wrong-password": "Votre mot de passe est incorrect",
+            "login.errors.auth/user-not-found ": "Cet email n'est pas utilisé"
+        }
     }
 }

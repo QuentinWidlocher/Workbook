@@ -1,9 +1,16 @@
-import { Component, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { globalVariables } from '@/services/globalVariables';
+import { firebaseService } from '@/services/firebase';
+import router from '@/router';
+import { entriesService } from '@/services/entries';
 
 @Component
 export default class Settings extends Vue {
-    private get darkMode() : boolean {
+    private get userName(): string {
+        return globalVariables.username;
+    }
+
+    private get darkMode(): boolean {
         return globalVariables.darkMode.booleanValue;
     }
     private set darkMode(state: boolean) {
@@ -34,11 +41,11 @@ export default class Settings extends Vue {
         globalVariables.autosave.booleanValue = state;
     }
 
-    public get availableLanguages(): { value: string, text: string }[] {
+    public get availableLanguages(): { value: string; text: string }[] {
         return [
             { value: 'fr', text: 'Français' },
             { value: 'en', text: 'English' },
-        ]
+        ];
     }
     private get lang(): string {
         return globalVariables.lang.value;
@@ -57,5 +64,10 @@ export default class Settings extends Vue {
 
         this.$vuetify.theme.dark = this.darkMode;
         this.$vuetify.theme.currentTheme.primary = this.themeColor;
+    }
+
+    private async disconnect() {
+        await firebaseService.auth.signOut();
+        router.push({ name: 'login' });
     }
 }
