@@ -33,6 +33,8 @@ export default class Home extends Vue {
     criterias: SearchCriterias = new SearchCriterias();
     searchOpened: boolean = false;
 
+    autosaveInterval?: number;
+
     private mounted() {
         loadingSpinner.startSpinning();
         this.listLoading = true;
@@ -47,6 +49,10 @@ export default class Home extends Vue {
                 this.listLoading = false;
             });
         this.initializeAutosaving();
+    }
+
+    private beforeDestroy() {
+        window.clearInterval(this.autosaveInterval);
     }
 
     private addEntry() {
@@ -136,10 +142,14 @@ export default class Home extends Vue {
 
     private initializeAutosaving() {
         window.addEventListener('beforeunload', (e: Event) => {
-            entries.saveCurrentEntry(this.originalCurrentEntry).catch(() => {});
+            entries.saveCurrentEntry(this.originalCurrentEntry).catch((e) => {
+                if (e.fatal) {
+                    console.error(e.text);
+                }
+            });
         });
 
-        setInterval(() => {
+        this.autosaveInterval = window.setInterval(() => {
             if (globalVariables.autosave.booleanValue) {
                 entries
                     .saveCurrentEntry(this.originalCurrentEntry)
@@ -147,7 +157,11 @@ export default class Home extends Vue {
                         // The new original entry is the now edited current entry
                         this.originalCurrentEntry = _.cloneDeep(this.currentEntry);
                     })
-                    .catch(() => {});
+                    .catch((e) => {
+                        if (e.fatal) {
+                            console.error(e.text);
+                        }
+                    });
             }
         }, globalVariables.autosaveInterval.numberValue);
     }

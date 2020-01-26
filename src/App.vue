@@ -6,12 +6,14 @@
                 Workbook
             </v-toolbar-title>
             <v-spacer />
-            <v-btn icon :to="{ name: 'settings' }">
-                <v-icon>mdi-settings</v-icon>
-            </v-btn>
-            <v-btn icon :loading="saveSpinner" @click="save">
-                <v-icon>{{ savePending ? 'mdi-content-save-alert' : 'mdi-content-save' }}</v-icon>
-            </v-btn>
+            <template v-if="isUserLoggedIn()">
+                <v-btn icon :to="{ name: 'settings' }">
+                    <v-icon>mdi-settings</v-icon>
+                </v-btn>
+                <v-btn icon :loading="saveSpinner" @click="save">
+                    <v-icon>{{ savePending ? 'mdi-content-save-alert' : 'mdi-content-save' }}</v-icon>
+                </v-btn>
+            </template>
         </v-app-bar>
 
         <v-content>

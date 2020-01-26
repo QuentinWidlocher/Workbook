@@ -55,7 +55,7 @@ export class EntriesService {
     // If originalEntry is passed, saving only occurs when objects are different
     public async saveEntry(entry: Entry, originalEntry?: Entry, create: boolean = false): Promise<Entry> {
         if (!entry) {
-            return Promise.reject({ fatal: true, text: 'Entry is empty' });
+            return Promise.reject({ fatal: false, text: 'Entry is empty' });
         }
 
         if (!(await firebaseService.isUserLoggedIn())) {

@@ -47,11 +47,10 @@ export class FirebaseService {
             .get()
             .then((snap) => {
                 return (snap.data() as any).name;
-            })
-            .catch(() => {});
+            });
     }
 
-    public async isUserLoggedIn(): Promise<boolean> {
+    public isUserLoggedIn(): boolean {
         return !!this.getCurrentUser();
     }
 }
