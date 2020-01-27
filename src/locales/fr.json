@@ -139,11 +139,13 @@
         "delete": "Supprimer la categorie"
     },
     "login": {
-        "title": "Veuillez vous connecter",
+        "title": "Connectez vous",
         "email": "Email",
         "password": "Mot de passe",
         "login": "Se connecter",
+        "noAccount": "Pas de compte ?",
         "loginAsAnon": "Se connecter en temps qu'invité",
+        "toRegister": "Créer un compte",
         "errors": {
             "auth/too-many-requests": "Vous essayez de vous connecter trop vite, réessayez plus tard",
             "auth/user-disabled": "Votre compte est desactivé",
@@ -152,7 +154,33 @@
             "auth/network-request-failed": "Impossible de vous connecter, réessayez",
             "auth/invalid-email": "Votre email est incorrect",
             "auth/wrong-password": "Votre mot de passe est incorrect",
-            "auth/user-not-found": "Cet email n'est pas utilisé"
+            "auth/user-not-found": "Cet email n'est pas utilisé",
+            "auth/email-already-in-use": "Cet email est déjà utlisé"
+        }
+    },
+    "register": {
+        "title": "Créez un compte",
+        "email": "Email",
+        "username": "Nom d'utilisateur",
+        "password": "Mot de passe",
+        "register": "Créer un compte",
+        "toLogin": "Déjà un compte ? Se connecter",
+        "requirements": {
+            "title": "Remplissez au moins {number} critères",
+            "password": {
+                "empty": "Vous devez spécifier un mot de passe",
+                "length": "Contient au moins {number} caractères",
+                "case": "Contient de minuscules et des majuscules",
+                "number": "Contient au moins un chiffre",
+                "special": "Contient au moins un caractère spécial"
+            },
+            "username": {
+                "empty": "Vous devez spécifier un nom d'utilisateur"
+            },
+            "email": {
+                "empty": "Vous devez spécifier un email",
+                "invalid": "L'email doit être correct"
+            }
         }
     }
 }

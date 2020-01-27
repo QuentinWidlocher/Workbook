@@ -142,6 +142,8 @@
         "email": "Email",
         "password": "Password",
         "login": "Log in",
+        "noAccount": "No account ?",
+        "toRegister": "Register an account",
         "loginAsAnon": "Log in as guest",
         "errors": {
             "auth/too-many-requests": "You tried to login too many time. Try again after some time",
@@ -151,7 +153,33 @@
             "auth/network-request-failed": "Login failed, please try again",
             "auth/invalid-email": "Your email is not correct",
             "auth/wrong-password ": "Your password is not correct",
-            "auth/user-not-found": "This email is not in use"
+            "auth/user-not-found": "This email is not in use",
+            "auth/email-already-in-use": "This email is already in use"
+        }
+    },
+    "register": {
+        "title": "Register an account",
+        "email": "Email",
+        "username": "Username",
+        "password": "Password",
+        "register": "Register",
+        "toLogin": "Already have an account ? Log in",
+        "requirements": {
+            "title": "Satisfy at least {number} criterias",
+            "password": {
+                "empty": "You must specify a password",
+                "length": "Contains at least {number} characters",
+                "case": "Contains both uppercase and lowercase",
+                "number": "Contains at least a number",
+                "special": "Contains at least a special character"
+            },
+            "username": {
+                "empty": "You must specify a username"
+            },
+            "email": {
+                "empty": "You must specify an email",
+                "invalid": "The email must be valid"
+            }
         }
     }
 }

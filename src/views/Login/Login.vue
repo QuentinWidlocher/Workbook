@@ -25,9 +25,15 @@
 
             <v-divider class="my-3" />
 
+            <h1>{{ $t('login.noAccount') }}</h1>
+
             <v-btn outlined block color="primary" @click="login(true)">
                 <v-icon left>mdi-incognito</v-icon>
                 {{ $t('login.loginAsAnon') }}
+            </v-btn>
+
+            <v-btn outlined block color="primary" :to="{ name: 'register' }" class="mt-3">
+                {{ $t('login.toRegister') }}
             </v-btn>
         </form>
     </div>

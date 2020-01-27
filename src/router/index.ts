@@ -3,6 +3,7 @@ import VueRouter, { Route } from 'vue-router';
 import Home from '@/views/Home/Home.vue';
 import Settings from '@/views/Settings/Settings.vue';
 import Login from '@/views/Login/Login.vue';
+import Register from '@/views/Register/Register.vue';
 import { savingSpinner } from '@/services/savingSpinner';
 import { loadingSpinner } from '@/services/loadingSpinner';
 import { firebaseService } from '@/services/firebase';
@@ -12,6 +13,7 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/', name: 'home', component: Home },
     { path: '/login', name: 'login', component: Login },
+    { path: '/register', name: 'register', component: Register },
     { path: '/settings', name: 'settings', component: Settings },
 ];
 
