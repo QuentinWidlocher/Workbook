@@ -41,7 +41,6 @@ import {
     ImageAction,
     TableAction,
 } from './Actions';
-import { debug } from 'webpack';
 
 @Component({
     components: {

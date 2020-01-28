@@ -35,14 +35,16 @@ export class FirebaseService {
         const user = this.auth.currentUser;
         if (user) {
             globalVariables.user.id = user.uid;
-            this.getUserName().then((name: string) => (globalVariables.user.name = name));
+            if (globalVariables.user.name) {
+                this.getUserName().then((name: string) => (globalVariables.user.name = name));
+            }
         }
         return user;
     }
 
     public async getUserName(): Promise<string> {
         if (globalVariables.user.isAnonymous) {
-            return 'Guest';
+            return 'guest';
         } else {
             return this.db
                 .collection('users')

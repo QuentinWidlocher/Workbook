@@ -25,6 +25,7 @@ const router = new VueRouter({
 
 router.beforeEach(async (to: Route, from: Route, next: any) => {
     savingSpinner.stopSpinning();
+    savingSpinner.pending = false;
     loadingSpinner.stopSpinning();
 
     const userLoggedIn = await firebaseService.isUserLoggedIn();

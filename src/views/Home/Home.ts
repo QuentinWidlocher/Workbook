@@ -39,8 +39,13 @@ export default class Home extends Vue {
         loadingSpinner.startSpinning();
         this.listLoading = true;
         entries
-            .initializeEntries()
-            .then(() => {
+            .initializeEntries(false)
+            .catch((e) => {
+                if (e.fatal) {
+                    console.error(e.text);
+                }
+            })
+            .finally(() => {
                 return categoriesService.initializeCategories();
             })
             .then(() => {
@@ -51,7 +56,23 @@ export default class Home extends Vue {
         this.initializeAutosaving();
     }
 
-    private beforeDestroy() {
+    private async beforeDestroy() {
+        try {
+            if (!this.currentEntry.id) {
+                if (!this.currentEntry.title) {
+                    await this.cancelCreation();
+                } else {
+                    if (this.originalCurrentEntry) {
+                        await entriesService.saveCurrentEntry(this.originalCurrentEntry);
+                    }
+                }
+            }
+        } catch (e) {
+            if (e.fatal) {
+                console.error(e.text);
+            }
+        }
+
         window.clearInterval(this.autosaveInterval);
     }
 
@@ -127,8 +148,14 @@ export default class Home extends Vue {
             } else {
                 // ... and is correct
 
-                // We save the current entry
-                entries.saveCurrentEntry(this.originalCurrentEntry).catch(() => {});
+                // We save the current entry if it's already been loaded
+                if (this.originalCurrentEntry) {
+                    entries.saveCurrentEntry(this.originalCurrentEntry).catch((e) => {
+                        if (e.fatal) {
+                            console.error(e.text);
+                        }
+                    });
+                }
             }
         }
 
@@ -137,7 +164,7 @@ export default class Home extends Vue {
     }
 
     private cancelCreation() {
-        entries.deleteEntry(this.currentEntry);
+        return entries.deleteEntry(this.currentEntry);
     }
 
     private initializeAutosaving() {
@@ -170,7 +197,11 @@ export default class Home extends Vue {
     @Watch('currentEntry.title')
     @Watch('currentEntry.categories.length')
     private onCurrentEntryChange() {
-        if (this.currentEntry && !_.isEqual(_.cloneDeep(this.currentEntry), this.originalCurrentEntry)) {
+        if (
+            this.currentEntry &&
+            this.originalCurrentEntry &&
+            !_.isEqual(_.cloneDeep(this.currentEntry), this.originalCurrentEntry)
+        ) {
             savingSpinner.pending = true;
         }
     }

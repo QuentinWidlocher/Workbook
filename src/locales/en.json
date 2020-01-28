@@ -145,6 +145,7 @@
         "noAccount": "No account ?",
         "toRegister": "Register an account",
         "loginAsAnon": "Log in as guest",
+        "guest": "Guest",
         "errors": {
             "auth/too-many-requests": "You tried to login too many time. Try again after some time",
             "auth/user-disabled": "Your account is disabled",

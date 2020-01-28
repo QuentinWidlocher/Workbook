@@ -2,7 +2,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { firebaseService } from '@/services/firebase';
 import router from '@/router';
 import { globalVariables } from '@/services/globalVariables';
-import { entriesService } from '@/services/entries';
+import { loadingSpinner } from '@/services/loadingSpinner';
 
 @Component
 export default class Login extends Vue {
@@ -13,6 +13,17 @@ export default class Login extends Vue {
     private loading: boolean = false;
 
     private errorMessage: string = '';
+
+    mounted() {
+        loadingSpinner.startSpinning();
+        firebaseService.auth.onAuthStateChanged((user: firebase.User | null) => {
+            loadingSpinner.stopSpinning();
+            if (user) {
+                globalVariables.user.isAnonymous = user.isAnonymous;
+                router.replace({ name: 'home' });
+            }
+        });
+    }
 
     private async login(anonymous: boolean = false): Promise<void> {
         this.loading = true;

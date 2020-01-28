@@ -31,7 +31,11 @@ export default class App extends Vue {
 
     private save(): void {
         // Force saving, even if not useful or if the entry does not yet exist
-        entriesService.saveCurrentEntry(undefined, true).catch((e) => console.error(e));
+        entriesService.saveCurrentEntry(undefined, true).catch((e) => {
+            if (e.fatal) {
+                console.error(e.text);
+            }
+        });
     }
 
     private initializeSettings(): void {

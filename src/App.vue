@@ -10,7 +10,7 @@
                 <v-btn icon :to="{ name: 'settings' }">
                     <v-icon>mdi-settings</v-icon>
                 </v-btn>
-                <v-btn icon :loading="saveSpinner" @click="save">
+                <v-btn icon :loading="saveSpinner" @click="save" v-if="$router.currentRoute.name === 'home'">
                     <v-icon>{{ savePending ? 'mdi-content-save-alert' : 'mdi-content-save' }}</v-icon>
                 </v-btn>
             </template>

@@ -4,15 +4,24 @@ import EntryMapper from '@/mappers/EntryMapper';
 import store from '@/store';
 import { globalVariables } from './globalVariables';
 import { savingSpinner } from '@/services/savingSpinner';
-import { loadingSpinner } from '@/services/loadingSpinner';
 import _ from 'lodash';
 
 export class EntriesService {
-    public async initializeEntries(): Promise<Entry[]> {
+    public async initializeEntries(forceInit: boolean = true): Promise<Entry[]> {
+        if (this.entries.length > 0 && !forceInit) {
+            return Promise.reject({
+                fatal: false,
+                text: 'Entries already loaded',
+            });
+        }
+
         this.entries = [];
 
         if (!(await firebaseService.isUserLoggedIn())) {
-            return Promise.reject();
+            return Promise.reject({
+                fatal: true,
+                text: 'User is not logged in',
+            });
         }
 
         return firebaseService.db
@@ -35,9 +44,18 @@ export class EntriesService {
     }
 
     public async createEntry(entry: Entry): Promise<Entry> {
-        if (!entry) return Promise.reject();
+        if (!entry) {
+            return Promise.reject({
+                fatal: true,
+                text: 'No entry specified',
+            });
+        }
+
         if (!(await firebaseService.isUserLoggedIn())) {
-            return Promise.reject();
+            return Promise.reject({
+                fatal: true,
+                text: 'User is not logged in',
+            });
         }
 
         const doc = await firebaseService.db
@@ -59,7 +77,10 @@ export class EntriesService {
         }
 
         if (!(await firebaseService.isUserLoggedIn())) {
-            return Promise.reject();
+            return Promise.reject({
+                fatal: true,
+                text: 'User is not logged in',
+            });
         }
 
         if (!globalVariables.user.id) {
@@ -87,7 +108,7 @@ export class EntriesService {
             }
         }
 
-        if (originalEntry && _.isEqual(_.cloneDeep(this.currentEntry), originalEntry)) {
+        if (originalEntry && _.isEqual(_.cloneDeep(entry), originalEntry)) {
             return Promise.reject({
                 fatal: false,
                 text: 'Objects are identical, no need to save',
@@ -117,7 +138,12 @@ export class EntriesService {
     }
 
     public addEntry(entry: Entry): Promise<Entry> {
-        if (!entry) return Promise.reject();
+        if (!entry)
+            return Promise.reject({
+                fatal: true,
+                text: 'No entry specified',
+            });
+
         store.commit('addEntry', entry);
         return Promise.resolve(entry);
     }
@@ -125,7 +151,10 @@ export class EntriesService {
     public async deleteEntry(entry: Entry): Promise<Entry> {
         if (!entry) return Promise.resolve(entry);
         if (!(await firebaseService.isUserLoggedIn())) {
-            return Promise.reject();
+            return Promise.reject({
+                fatal: true,
+                text: 'User is not logged in',
+            });
         }
         if (!entry.id) {
             store.commit('deleteEntry', entry);
@@ -143,6 +172,11 @@ export class EntriesService {
             this.currentEntryIndex = -1;
             return entry;
         }
+    }
+
+    public async deleteAllEntries(): Promise<void> {
+        store.commit('setEntries', []);
+        store.commit('setOriginalEntries', []);
     }
 
     public get currentEntry(): Entry {

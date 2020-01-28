@@ -7,7 +7,13 @@ import { entriesService } from '@/services/entries';
 @Component
 export default class Settings extends Vue {
     private get userName(): string {
-        return globalVariables.user.name;
+        if (globalVariables.user.isAnonymous) {
+            return this.$t('login.guest')
+                .toString()
+                .toLocaleLowerCase();
+        } else {
+            return globalVariables.user.name;
+        }
     }
 
     private get darkMode(): boolean {
@@ -68,6 +74,7 @@ export default class Settings extends Vue {
 
     private async disconnect() {
         await firebaseService.auth.signOut();
+        await entriesService.deleteAllEntries();
         router.push({ name: 'login' });
     }
 }
