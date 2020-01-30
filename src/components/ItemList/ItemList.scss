@@ -1,9 +1,10 @@
 #ItemList {
-    overflow-y: auto;
+    overflow-y: hidden;
     height: 100%;
 
     .v-list {
         height: 100%;
+        overflow-y: auto;
 
         .v-list-item__title.dark {
             color: white;

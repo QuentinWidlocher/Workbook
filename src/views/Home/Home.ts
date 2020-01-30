@@ -130,9 +130,6 @@ export default class Home extends Vue {
         // We get the index of the entry in the **entries** list, not the display one
         const entryIndex = this.itemList[itemIndex].entryIndex;
 
-        // console.debug(`itemIndex : ${itemIndex + 1} / ${this.itemList.length}`);
-        // console.debug(`entryIndex ${entryIndex + 1} / ${this.entries.length}`);
-
         if (entryIndex === this.currentEntryIndex) return;
 
         if (this.currentEntryIndex < 0) {
@@ -228,7 +225,6 @@ export default class Home extends Vue {
             !_.isEqual(_.cloneDeep(this.currentEntry), this.originalCurrentEntry)
         ) {
             savingSpinner.pending = true;
-            console.debug(this.entries);
             this.onEntriesChange();
         }
     }
