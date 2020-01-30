@@ -1,7 +1,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import Entry from '@/models/entry';
 import Edition from '@/components/Edition/Edition.vue';
-import EntryList from '@/components/EntryList/EntryList.vue';
+import ItemList from '@/components/ItemList/ItemList.vue';
 import { entriesService as entries, entriesService } from '@/services/entries';
 import { globalVariables } from '@/services/globalVariables';
 import _ from 'lodash';
@@ -12,21 +12,26 @@ import Search from '@/components/Search/Search.vue';
 import SearchCriterias from '@/models/searchCriterias';
 import { loadingSpinner } from '@/services/loadingSpinner';
 import { categoriesService } from '@/services/categories';
+import EntryMapper from '@/mappers/EntryMapper';
+import ListItem from '@/models/listItem';
 
 @Component({
     components: {
         Edition,
-        EntryList,
+        ItemList,
         Search,
     },
 })
 export default class Home extends Vue {
-    public originalCurrentEntry!: Entry; // to compare changes
+    originalCurrentEntry!: Entry; // to compare changes
 
     @State2Way('changeEntryIndex', 'currentEntryIndex') currentEntryIndex!: number;
     @State2Way('setEntries', 'entries') entries!: Entry[];
     @State originalEntries!: Entry[];
     @Getter currentEntry!: Entry;
+
+    itemList: ListItem[] = [];
+    selectedItem: number = 0;
 
     listLoading: boolean = true;
 
@@ -38,6 +43,7 @@ export default class Home extends Vue {
     private mounted() {
         loadingSpinner.startSpinning();
         this.listLoading = true;
+
         entries
             .initializeEntries(false)
             .catch((e) => {
@@ -49,7 +55,10 @@ export default class Home extends Vue {
                 return categoriesService.initializeCategories();
             })
             .then(() => {
-                this.entries = this.criterias.doSort(this.entries);
+                this.itemList = EntryMapper.toList(this.entries);
+                this.itemList = this.criterias.doSort(this.itemList);
+                this.itemList = this.criterias.doGroup(this.itemList);
+
                 loadingSpinner.stopSpinning();
                 this.listLoading = false;
             });
@@ -84,11 +93,24 @@ export default class Home extends Vue {
 
         // We add an empty entry
         entries.addEntry(Entry.newEmpty());
+        this.itemList.push(new ListItem(undefined, false, undefined, this.entries.length - 1));
 
         if (this.currentEntryIndex < 0) this.currentEntryIndex = 0;
 
         // We select it
-        this.selectEntry(this.entries.length - 1);
+        this.selectEntry(this.itemList.length - 1);
+    }
+
+    private openSearch() {
+        this.currentEntryIndex = -1;
+        this.searchOpened = true;
+    }
+
+    private closeSearch() {
+        this.searchOpened = false;
+        if (this.entries.length === 1) {
+            this.selectEntryEdition(0);
+        }
     }
 
     private selectEntry(index: number) {
@@ -104,23 +126,24 @@ export default class Home extends Vue {
         this.currentEntryIndex = index;
     }
 
-    private openSearch() {
-        this.currentEntryIndex = -1;
-        this.searchOpened = true;
-    }
+    private selectEntryEdition(itemIndex: number) {
+        // We get the index of the entry in the **entries** list, not the display one
+        const entryIndex = this.itemList[itemIndex].entryIndex;
 
-    private closeSearch() {
-        this.searchOpened = false;
-        if (this.entries.length === 1) {
-            this.selectEntryEdition(0);
-        }
-    }
+        // console.debug(`itemIndex : ${itemIndex + 1} / ${this.itemList.length}`);
+        // console.debug(`entryIndex ${entryIndex + 1} / ${this.entries.length}`);
 
-    private selectEntryEdition(index: number) {
-        if (index === this.currentEntryIndex) return;
+        if (entryIndex === this.currentEntryIndex) return;
 
         if (this.currentEntryIndex < 0) {
-            this.currentEntryIndex = index;
+            this.currentEntryIndex = itemIndex;
+        }
+
+        if (!this.currentEntry) {
+            this.currentEntryIndex = entryIndex;
+            this.selectedItem = itemIndex;
+            this.originalCurrentEntry = _.cloneDeep(this.currentEntry);
+            return;
         }
 
         if (!this.currentEntry.id) {
@@ -135,7 +158,7 @@ export default class Home extends Vue {
 
                 // We create the entry
                 entries.createEntry(this.currentEntry);
-                this.criterias.doSort(this.entries);
+                this.itemList = this.criterias.doSort(this.itemList);
             }
         } else {
             // If the entry already existed...
@@ -159,7 +182,8 @@ export default class Home extends Vue {
             }
         }
 
-        this.currentEntryIndex = index;
+        this.currentEntryIndex = entryIndex;
+        this.selectedItem = itemIndex;
         this.originalCurrentEntry = _.cloneDeep(this.currentEntry);
     }
 
@@ -183,6 +207,7 @@ export default class Home extends Vue {
                     .then(() => {
                         // The new original entry is the now edited current entry
                         this.originalCurrentEntry = _.cloneDeep(this.currentEntry);
+                        this.search(this.criterias);
                     })
                     .catch((e) => {
                         if (e.fatal) {
@@ -203,11 +228,21 @@ export default class Home extends Vue {
             !_.isEqual(_.cloneDeep(this.currentEntry), this.originalCurrentEntry)
         ) {
             savingSpinner.pending = true;
+            console.debug(this.entries);
+            this.onEntriesChange();
         }
     }
 
+    @Watch('entries.length')
+    private onEntriesChange() {
+        this.search(this.criterias);
+    }
+
     private search(criterias: SearchCriterias) {
-        this.entries = criterias.filter(this.originalEntries);
-        this.entries = criterias.doSort(this.entries);
+        this.itemList = EntryMapper.toList(this.entries);
+        this.itemList = criterias.filter(this.itemList);
+        this.itemList = criterias.doSort(this.itemList);
+        this.itemList = criterias.doGroup(this.itemList);
+        this.selectedItem = this.itemList.findIndex((i) => i.entry === this.currentEntry);
     }
 }

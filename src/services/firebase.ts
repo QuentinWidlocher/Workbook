@@ -35,7 +35,7 @@ export class FirebaseService {
         const user = this.auth.currentUser;
         if (user) {
             globalVariables.user.id = user.uid;
-            if (globalVariables.user.name) {
+            if (!globalVariables.user.name) {
                 this.getUserName().then((name: string) => (globalVariables.user.name = name));
             }
         }

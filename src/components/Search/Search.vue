@@ -12,7 +12,7 @@
                 >
                     <template #label>
                         <v-icon>mdi-magnify</v-icon>
-                        {{$t('search.search')}}
+                        {{ $t('search.search') }}
                     </template>
                 </v-text-field>
             </v-col>
@@ -52,12 +52,11 @@
                         <v-expansion-panel-header>
                             <div>
                                 <v-icon left>mdi-calendar-search</v-icon>
-                                {{$t('search.criterias.dates.searchByDates')}}
+                                {{ $t('search.criterias.dates.searchByDates') }}
                             </div>
                         </v-expansion-panel-header>
                         <v-expansion-panel-content>
                             <v-row>
-                                
                                 <v-col :cols="6">
                                     <v-menu
                                         v-model="showCreationDateAfter"
@@ -68,19 +67,19 @@
                                         min-width="290px"
                                     >
                                         <template v-slot:activator="{ on }">
-                                        <v-text-field
-                                            v-model="criterias.creationDateAfter"
-                                            :label="$t('search.criterias.dates.creationDateAfter')"
-                                            prepend-icon="mdi-calendar-arrow-left"
-                                            readonly
-                                            clearable
-                                            :hint="$t('search.criterias.dates.format')"
-                                            persistent-hint
-                                            v-on="on"
-                                        ></v-text-field>
+                                            <v-text-field
+                                                v-model="criterias.creationDateAfter"
+                                                :label="$t('search.criterias.dates.creationDateAfter')"
+                                                prepend-icon="mdi-calendar-arrow-left"
+                                                readonly
+                                                clearable
+                                                :hint="$t('search.criterias.dates.format')"
+                                                persistent-hint
+                                                v-on="on"
+                                            ></v-text-field>
                                         </template>
-                                        <v-date-picker 
-                                            v-model="criterias.creationDateAfter" 
+                                        <v-date-picker
+                                            v-model="criterias.creationDateAfter"
                                             @input="showCreationDateAfter = false"
                                             color="primary"
                                         />
@@ -97,19 +96,19 @@
                                         min-width="290px"
                                     >
                                         <template v-slot:activator="{ on }">
-                                        <v-text-field
-                                            v-model="criterias.creationDateBefore"
-                                            :label="$t('search.criterias.dates.creationDateBefore')"
-                                            prepend-icon="mdi-calendar-arrow-right"
-                                            readonly
-                                            clearable
-                                            :hint="$t('search.criterias.dates.format')"
-                                            persistent-hint
-                                            v-on="on"
-                                        ></v-text-field>
+                                            <v-text-field
+                                                v-model="criterias.creationDateBefore"
+                                                :label="$t('search.criterias.dates.creationDateBefore')"
+                                                prepend-icon="mdi-calendar-arrow-right"
+                                                readonly
+                                                clearable
+                                                :hint="$t('search.criterias.dates.format')"
+                                                persistent-hint
+                                                v-on="on"
+                                            ></v-text-field>
                                         </template>
-                                        <v-date-picker 
-                                            v-model="criterias.creationDateBefore" 
+                                        <v-date-picker
+                                            v-model="criterias.creationDateBefore"
                                             @input="showCreationDateBefore = false"
                                             color="primary"
                                         />
@@ -126,19 +125,19 @@
                                         min-width="290px"
                                     >
                                         <template v-slot:activator="{ on }">
-                                        <v-text-field
-                                            v-model="criterias.editionDateAfter"
-                                            :label="$t('search.criterias.dates.editionDateAfter')"
-                                            prepend-icon="mdi-calendar-arrow-left"
-                                            readonly
-                                            :hint="$t('search.criterias.dates.format')"
-                                            persistent-hint
-                                            clearable
-                                            v-on="on"
-                                        ></v-text-field>
+                                            <v-text-field
+                                                v-model="criterias.editionDateAfter"
+                                                :label="$t('search.criterias.dates.editionDateAfter')"
+                                                prepend-icon="mdi-calendar-arrow-left"
+                                                readonly
+                                                :hint="$t('search.criterias.dates.format')"
+                                                persistent-hint
+                                                clearable
+                                                v-on="on"
+                                            ></v-text-field>
                                         </template>
-                                        <v-date-picker 
-                                            v-model="criterias.editionDateAfter" 
+                                        <v-date-picker
+                                            v-model="criterias.editionDateAfter"
                                             @input="showEditionDateAfter = false"
                                             color="primary"
                                         />
@@ -155,25 +154,24 @@
                                         min-width="290px"
                                     >
                                         <template v-slot:activator="{ on }">
-                                        <v-text-field
-                                            v-model="criterias.editionDateBefore"
-                                            :label="$t('search.criterias.dates.editionDateBefore')"
-                                            prepend-icon="mdi-calendar-arrow-right"
-                                            readonly
-                                            clearable
-                                            :hint="$t('search.criterias.dates.format')"
-                                            persistent-hint
-                                            v-on="on"
-                                        ></v-text-field>
+                                            <v-text-field
+                                                v-model="criterias.editionDateBefore"
+                                                :label="$t('search.criterias.dates.editionDateBefore')"
+                                                prepend-icon="mdi-calendar-arrow-right"
+                                                readonly
+                                                clearable
+                                                :hint="$t('search.criterias.dates.format')"
+                                                persistent-hint
+                                                v-on="on"
+                                            ></v-text-field>
                                         </template>
-                                        <v-date-picker 
-                                            v-model="criterias.editionDateBefore" 
+                                        <v-date-picker
+                                            v-model="criterias.editionDateBefore"
                                             @input="showEditionDateBefore = false"
                                             color="primary"
                                         />
                                     </v-menu>
                                 </v-col>
-
                             </v-row>
                         </v-expansion-panel-content>
                     </v-expansion-panel>
@@ -181,12 +179,7 @@
             </v-col>
 
             <v-col :cols="6">
-
-                <ItemsSelector
-                    :items="categories"
-                    :selectedItems.sync="criterias.matchCategories"
-                /> 
-
+                <ItemsSelector :items="categories" :selectedItems.sync="criterias.matchCategories" />
             </v-col>
             <v-col :cols="6" class="mt-3">
                 <v-select
@@ -198,28 +191,27 @@
                     v-model="criterias.sort"
                     :items="sortValues"
                 />
-            </v-col>
 
+                <v-select
+                    :label="$t('search.groups.group')"
+                    prepend-inner-icon="mdi-group"
+                    outlined
+                    dense
+                    @change="groupSelectChange"
+                    v-model="criterias.group"
+                    :items="groupValues"
+                />
+            </v-col>
         </v-row>
         <div class="d-flex justify-end">
             <div class="mt-auto">
-                <v-btn
-                    color="error"
-                    class="mr-2"
-                    outlined
-                    depressed
-                    @click="clearSearch"
-                >
+                <v-btn color="error" class="mr-2" outlined depressed @click="clearSearch">
                     <v-icon left>mdi-close-circle</v-icon>
-                    {{$t('search.actions.clearSearch')}}
+                    {{ $t('search.actions.clearSearch') }}
                 </v-btn>
-                <v-btn
-                    color="primary"
-                    depressed
-                    @click="search(false)"
-                >
+                <v-btn color="primary" depressed @click="search(false)">
                     <v-icon left>mdi-magnify</v-icon>
-                    {{$t('search.actions.search')}}
+                    {{ $t('search.actions.search') }}
                 </v-btn>
             </div>
         </div>

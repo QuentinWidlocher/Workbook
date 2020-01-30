@@ -72,7 +72,7 @@
             }
         }
     },
-    "entryList": {
+    "itemList": {
         "labels": {
             "newEntry": "New entry",
             "emptyEntry": "Entry cannot be empty",
@@ -103,9 +103,15 @@
         },
         "sorts": {
             "sort": "Sort",
-            "alphabetical": "Alphabetical",
-            "creationDate": "Creation date",
-            "editionDate": "Edition date"
+            "alphabetical": "Alphabeticaly",
+            "creationDate": "By creation date",
+            "editionDate": "By edition date"
+        },
+        "groups": {
+            "group": "Group",
+            "none": "Don't group",
+            "alphabetical": "Alphabeticaly",
+            "categories": "By categories"
         },
         "actions": {
             "clearSearch": "Clear search",

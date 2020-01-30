@@ -73,7 +73,7 @@
             }
         }
     },
-    "entryList": {
+    "itemList": {
         "labels": {
             "newEntry": "Nouvelle entrée",
             "emptyEntry": "L'entrée ne peux pas être vide",
@@ -103,10 +103,16 @@
             "matchCase": "Respecter la casse"
         },
         "sorts": {
-            "sort": "Trier",
+            "sort": "Trier par",
             "alphabetical": "Ordre alphabétique",
             "creationDate": "Date de création",
             "editionDate": "Date d'édition"
+        },
+        "groups": {
+            "group": "Grouper par",
+            "none": "Ne pas grouper",
+            "alphabetical": "Ordre alphabétique",
+            "categories": "Catégories"
         },
         "actions": {
             "clearSearch": "Effacer la recherche",
