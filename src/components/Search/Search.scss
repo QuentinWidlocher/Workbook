@@ -2,4 +2,13 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+
+    .second-row {
+        height: 100%;
+        overflow: hidden;
+
+        .col {
+            height: 100%;
+        }
+    }
 }

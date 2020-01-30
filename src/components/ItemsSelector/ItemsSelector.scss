@@ -1,0 +1,15 @@
+#ItemsSelector {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+
+    .v-container {
+        flex: initial;
+    }
+
+    .v-list {
+        flex: 1;
+        overflow-y: auto;
+    }
+}

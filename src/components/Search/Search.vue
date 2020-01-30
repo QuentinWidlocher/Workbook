@@ -177,7 +177,9 @@
                     </v-expansion-panel>
                 </v-expansion-panels>
             </v-col>
+        </v-row>
 
+        <v-row class="second-row">
             <v-col :cols="6">
                 <ItemsSelector :items="categories" :selectedItems.sync="criterias.matchCategories" />
             </v-col>
