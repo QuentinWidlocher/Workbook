@@ -47,8 +47,8 @@ export default class Home extends Vue {
         entries
             .initializeEntries(false)
             .catch((e) => {
-                if (e.fatal) {
-                    console.error(e.text);
+                if (globalVariables.debug.booleanValue) {
+                    e.fatal ? console.error(e.text) : console.warn(e.text);
                 }
             })
             .finally(() => {
@@ -77,25 +77,27 @@ export default class Home extends Vue {
                 }
             }
         } catch (e) {
-            if (e.fatal) {
-                console.error(e.text);
+            if (globalVariables.debug.booleanValue) {
+                e.fatal ? console.error(e.text) : console.warn(e.text);
             }
         }
 
         window.clearInterval(this.autosaveInterval);
     }
 
-    private addEntry() {
+    private async addEntry() {
         // We prevent the user from adding the entry if he's already creating one
         if (this.currentEntry && !this.currentEntry.id && !this.currentEntry.title) {
             return;
         }
 
         // We add an empty entry
-        entries.addEntry(Entry.newEmpty());
-        this.itemList.push(new ListItem(undefined, false, undefined, this.entries.length - 1));
+        const addedEntryIndex = await entries.addEntry(Entry.newEmpty());
 
-        if (this.currentEntryIndex < 0) this.currentEntryIndex = 0;
+        this.currentEntryIndex = addedEntryIndex;
+
+        this.itemList = this.criterias.doSort(this.itemList);
+        this.itemList = this.criterias.doGroup(this.itemList);
 
         // We select it
         this.selectEntry(this.itemList.length - 1);
@@ -108,8 +110,14 @@ export default class Home extends Vue {
 
     private closeSearch() {
         this.searchOpened = false;
-        if (this.entries.length === 1) {
-            this.selectEntryEdition(0);
+
+        if (this.itemList.filter((i) => !i.isSubheader).length === 1) {
+            for (let i = 0; i < this.itemList.length; i++) {
+                if (!this.itemList[i].isSubheader) {
+                    this.selectEntryEdition(i);
+                    break;
+                }
+            }
         }
     }
 
@@ -123,12 +131,18 @@ export default class Home extends Vue {
 
     private selectEntrySearch(index: number) {
         this.searchOpened = false;
-        this.currentEntryIndex = index;
+
+        this.selectedItem = index;
+
+        const entryIndex = this.itemList[index].entryIndex;
+        this.currentEntryIndex = entryIndex;
     }
 
-    private selectEntryEdition(itemIndex: number) {
+    private async selectEntryEdition(itemIndex: number) {
         // We get the index of the entry in the **entries** list, not the display one
         const entryIndex = this.itemList[itemIndex].entryIndex;
+
+        this.selectedItem = itemIndex;
 
         if (entryIndex === this.currentEntryIndex) return;
 
@@ -136,26 +150,20 @@ export default class Home extends Vue {
             this.currentEntryIndex = itemIndex;
         }
 
-        if (!this.currentEntry) {
-            this.currentEntryIndex = entryIndex;
-            this.selectedItem = itemIndex;
-            this.originalCurrentEntry = _.cloneDeep(this.currentEntry);
-            return;
-        }
-
-        if (!this.currentEntry.id) {
+        if (!this.currentEntry || !this.currentEntry.id) {
             // if the entry has just been added...
-            if (!this.currentEntry.title) {
+            if (!this.currentEntry || !this.currentEntry.title) {
                 // ... and is empty
 
                 // We cancel the creation of the entry
-                this.cancelCreation();
+                this.cancelCreation(entryIndex);
             } else {
                 // ...and is correct
 
                 // We create the entry
-                entries.createEntry(this.currentEntry);
-                this.itemList = this.criterias.doSort(this.itemList);
+                await entries.createEntry(this.currentEntry);
+                this.search(this.criterias);
+                this.selectedItem = itemIndex;
             }
         } else {
             // If the entry already existed...
@@ -170,29 +178,35 @@ export default class Home extends Vue {
 
                 // We save the current entry if it's already been loaded
                 if (this.originalCurrentEntry) {
-                    entries.saveCurrentEntry(this.originalCurrentEntry).catch((e) => {
-                        if (e.fatal) {
-                            console.error(e.text);
+                    try {
+                        await entries.saveCurrentEntry(this.originalCurrentEntry);
+                    } catch (e) {
+                        if (globalVariables.debug.booleanValue) {
+                            e.fatal ? console.error(e.text) : console.warn(e.text);
                         }
-                    });
+                    }
                 }
             }
         }
 
         this.currentEntryIndex = entryIndex;
-        this.selectedItem = itemIndex;
         this.originalCurrentEntry = _.cloneDeep(this.currentEntry);
+
+        if (this.selectedItem == this.itemList.length) {
+            (this.$refs.list as any).scrollToBottom();
+        }
     }
 
-    private cancelCreation() {
-        return entries.deleteEntry(this.currentEntry);
+    private cancelCreation(nextIndex = -1) {
+        console.debug('cancelCreation');
+        return entries.deleteEntry(this.currentEntry, nextIndex);
     }
 
     private initializeAutosaving() {
         window.addEventListener('beforeunload', (e: Event) => {
             entries.saveCurrentEntry(this.originalCurrentEntry).catch((e) => {
-                if (e.fatal) {
-                    console.error(e.text);
+                if (globalVariables.debug.booleanValue) {
+                    e.fatal ? console.error(e.text) : console.warn(e.text);
                 }
             });
         });
@@ -207,12 +221,16 @@ export default class Home extends Vue {
                         this.search(this.criterias);
                     })
                     .catch((e) => {
-                        if (e.fatal) {
-                            console.error(e.text);
+                        if (globalVariables.debug.booleanValue) {
+                            e.fatal ? console.error(e.text) : console.warn(e.text);
                         }
                     });
             }
         }, globalVariables.autosaveInterval.numberValue);
+    }
+
+    private onEntryDeleted() {
+        this.selectedItem = 0;
     }
 
     @Watch('currentEntry.description')

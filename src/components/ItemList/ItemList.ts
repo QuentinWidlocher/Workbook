@@ -13,4 +13,9 @@ export default class ItemList extends Vue {
     private selectItem(index: number) {
         this.$emit('select', index);
     }
+
+    public scrollToBottom() {
+        const list = this.$refs.list as any;
+        list.$el.scrollTop = list.$el.scrollHeight;
+    }
 }

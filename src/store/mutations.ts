@@ -7,15 +7,11 @@ const mutations: MutationTree<RootState> = {
         state.entries.push(entry);
     },
     deleteEntry(state: RootState, entry: Entry) {
-        const entryIndex = state.entries.findIndex(
-            (entryInList: Entry) => entryInList === entry
-        );
+        const entryIndex = state.entries.findIndex((entryInList: Entry) => entryInList === entry);
         state.entries.splice(entryIndex, 1);
     },
     editEntry(state: RootState, edits: { entry: Entry; edits: any }) {
-        const entryIndex = state.entries.findIndex(
-            (entryInList: Entry) => entryInList === edits.entry
-        );
+        const entryIndex = state.entries.findIndex((entryInList: Entry) => entryInList === edits.entry);
         if (entryIndex >= 0) {
             Object.assign(state.entries[entryIndex], edits.edits);
         }
@@ -27,14 +23,12 @@ const mutations: MutationTree<RootState> = {
         state.originalEntries = entries;
     },
     deleteOriginalEntry(state: RootState, entry: Entry) {
-        const entryIndex = state.originalEntries.findIndex(
-            (entryInList: Entry) => entryInList === entry
-        );
+        const entryIndex = state.originalEntries.findIndex((entryInList: Entry) => entryInList === entry);
         state.originalEntries.splice(entryIndex, 1);
     },
     mergeOriginalEntries(state: RootState, entries: Entry[]) {
         entries.forEach((entry: Entry) => {
-            const index = state.originalEntries.findIndex(c => c.id === entry.id);
+            const index = state.originalEntries.findIndex((c) => c.id === entry.id);
             if (index >= 0) {
                 state.originalEntries[index] = entry;
             } else {

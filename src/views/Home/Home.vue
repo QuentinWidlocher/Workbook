@@ -30,6 +30,7 @@
                 :selected="selectedItem"
                 :loading="listLoading"
                 @select="selectEntry"
+                ref="list"
             />
 
             <v-slide-y-reverse-transition>

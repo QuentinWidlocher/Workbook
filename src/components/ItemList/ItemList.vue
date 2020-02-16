@@ -1,6 +1,6 @@
 <template>
     <div id="ItemList">
-        <v-list dense shaped>
+        <v-list dense shaped ref="list">
             <template v-for="(item, index) in items">
                 <v-list-item
                     v-if="!item.isSubheader"
@@ -23,10 +23,12 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-subheader v-else :key="`${index}-${item.name}`" class="ml-1">{{ item.name }}</v-subheader>
+                <v-subheader v-else :key="`${index}-${item.name}`" class="ml-1 text-uppercase">{{
+                    item.name
+                }}</v-subheader>
             </template>
 
-            <v-skeleton-loader v-if="loading" type="list-item@10"></v-skeleton-loader>
+            <v-skeleton-loader v-if="loading" type="list-item@11"></v-skeleton-loader>
         </v-list>
     </div>
 </template>

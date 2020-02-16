@@ -92,7 +92,7 @@ export class EntriesService {
 
         if (!entry.title) {
             return Promise.reject({
-                fatal: true,
+                fatal: false,
                 text: 'Entry title is empty',
             });
         }
@@ -137,7 +137,7 @@ export class EntriesService {
         return this.saveEntry(this.currentEntry, originalEntry, create);
     }
 
-    public addEntry(entry: Entry): Promise<Entry> {
+    public addEntry(entry: Entry): Promise<number> {
         if (!entry)
             return Promise.reject({
                 fatal: true,
@@ -145,10 +145,10 @@ export class EntriesService {
             });
 
         store.commit('addEntry', entry);
-        return Promise.resolve(entry);
+        return Promise.resolve(this.entries.length - 1);
     }
 
-    public async deleteEntry(entry: Entry): Promise<Entry> {
+    public async deleteEntry(entry: Entry, nextIndex: number = -1): Promise<Entry> {
         if (!entry) return Promise.resolve(entry);
         if (!(await firebaseService.isUserLoggedIn())) {
             return Promise.reject({
@@ -158,7 +158,7 @@ export class EntriesService {
         }
         if (!entry.id) {
             store.commit('deleteEntry', entry);
-            this.currentEntryIndex = -1;
+            this.currentEntryIndex = nextIndex;
             return Promise.resolve(entry);
         } else {
             await firebaseService.db
@@ -169,7 +169,7 @@ export class EntriesService {
                 .delete();
             store.commit('deleteEntry', entry);
             store.commit('deleteOriginalEntry', entry);
-            this.currentEntryIndex = -1;
+            this.currentEntryIndex = nextIndex;
             return entry;
         }
     }

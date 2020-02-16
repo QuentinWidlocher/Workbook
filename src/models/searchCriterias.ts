@@ -105,8 +105,11 @@ export default class SearchCriterias {
         const list = items.sort((a: ListItem, b: ListItem) => {
             switch (this.sort) {
                 case SortType.Alphabeticaly:
-                    if (a.entry && (!a.entry.id || !a.entry.title)) {
+                    if (a.entry && !a.entry.id) {
                         return 1;
+                    }
+                    if (b.entry && !b.entry.id) {
+                        return -1;
                     }
 
                     return a.name.localeCompare(b.name);
@@ -137,10 +140,10 @@ export default class SearchCriterias {
                 let previousLetter: string | undefined;
 
                 items.reverse().forEach((item: ListItem) => {
-                    if (item.entry && (!item.entry.id || !item.entry.title)) {
+                    if (!item.entry || (item.entry && !item.entry.id)) {
                         groupedList.unshift(item);
                     } else if (!previousLetter) {
-                        previousLetter = item.name[0];
+                        previousLetter = item.name[0].toUpperCase();
                         groupedList.unshift(item);
                     } else if (item.name[0].toUpperCase() === previousLetter) {
                         groupedList.unshift(item);

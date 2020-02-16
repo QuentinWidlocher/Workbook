@@ -19,6 +19,8 @@ export class GlobalVariables {
     public autosaveInterval: Variable = new Variable('autosave_interval', '2500');
 
     public lang: Variable = new Variable('lang', 'en');
+
+    public debug: Variable = new Variable('debug', '0');
 }
 
 export const globalVariables: GlobalVariables = new GlobalVariables();
