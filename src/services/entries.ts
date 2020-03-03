@@ -137,6 +137,14 @@ export class EntriesService {
         return this.saveEntry(this.currentEntry, originalEntry, create);
     }
 
+    public saveAllEntries(): Promise<Entry[]> {
+        const promises: Promise<Entry>[] = [];
+        this.entries.forEach((entry: Entry) => {
+            promises.push(this.saveEntry(entry));
+        });
+        return Promise.all(promises);
+    }
+
     public addEntry(entry: Entry): Promise<number> {
         if (!entry)
             return Promise.reject({

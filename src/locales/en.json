@@ -124,7 +124,16 @@
             "label": "General settings",
             "autosave": "Auto-save",
             "autosaveInterval": "Auto-save interval",
-            "language": "Application language"
+            "language": "Application language",
+            "loadData": "Restore a backup",
+            "loadDataWarning": {
+                "title": "Warning !",
+                "content": "You are about to restore an old backup. <br> All your current data will be <b>OVERWRITTEN</b>. Are you certain you want to restore the backup ?",
+                "deleteButtonLabel": "Restore the backup",
+                "cancelButtonLabel": "Don't restore",
+                "confirmMessage": "{nb} entry(ies) restored"
+            },
+            "saveData": "Create a backup"
         },
         "theme": {
             "label": "Application theme",

@@ -125,7 +125,16 @@
             "label": "Paramètres généraux",
             "autosave": "Sauvegarde automatique",
             "autosaveInterval": "Interval de sauvegarde automatique",
-            "language": "Langue de l'application"
+            "language": "Langue de l'application",
+            "loadData": "Charger une sauvegarde",
+            "loadDataWarning": {
+                "title": "Attention !",
+                "content": "Vous allez importer d'anciennes données. <br> Cela va <b>ECRASER</b> vos données actuelles. Êtes vous bien certain de vouloir les importer ?",
+                "deleteButtonLabel": "Importer les données",
+                "cancelButtonLabel": "Ne pas importer",
+                "confirmMessage": "{nb} entrée(s) restaurée(s)"
+            },
+            "saveData": "Sauvegarder les données"
         },
         "theme": {
             "label": "Thème de l'application",

@@ -19,6 +19,22 @@
                         v-model="lang"
                         :items="availableLanguages"
                     />
+
+                    <v-btn color="primary" depressed class="mr-3" @click="saveData">
+                        {{ $t('settings.general.saveData') }}
+                    </v-btn>
+
+                    <input ref="fileInput" type="file" accept=".wrkbk" hidden @change="loadData" />
+
+                    <v-btn
+                        color="primary"
+                        outlined
+                        depressed
+                        @click="openFileUpload"
+                        :loading="loadDataLoading"
+                    >
+                        {{ $t('settings.general.loadData') }}
+                    </v-btn>
                 </v-expansion-panel-content>
             </v-expansion-panel>
 
@@ -64,6 +80,18 @@
                 </v-btn>
             </v-col>
         </v-row>
+
+        <DeleteDialog
+            v-model="deleteDialog.visible"
+            :title="deleteDialog.title"
+            :content="deleteDialog.content"
+            :deleteButtonLabel="deleteDialog.deleteButtonLabel"
+            :cancelButtonLabel="deleteDialog.cancelButtonLabel"
+            @confirm="deleteDialog.confirm"
+        />
+        <v-snackbar v-model="deleteDialog.showConfirm" color="primary">
+            {{ deleteDialog.confirmMessage }}
+        </v-snackbar>
     </div>
 </template>
 <style lang="scss" src="./Settings.scss" scoped></style>
