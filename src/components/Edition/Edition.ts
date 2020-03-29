@@ -3,7 +3,6 @@ import Entry from '@/models/entry';
 import { entriesService as entries } from '@/services/entries';
 import Editor from './Editor/Editor.vue';
 import DeleteDialog from '@/components/DeleteDialog/DeleteDialog.vue';
-import CategoriesDialog from '@/components/CategoriesDialog/CategoriesDialog.vue';
 import { Getter, State } from 'vuex-class';
 import { State2Way } from 'vuex-class-state2way';
 import { categoriesService } from '@/services/categories';
@@ -12,12 +11,10 @@ import { categoriesService } from '@/services/categories';
     components: {
         Editor,
         DeleteDialog,
-        CategoriesDialog,
     },
 })
 export default class Edition extends Vue {
     private deleteDialog: boolean = false;
-    private categoriesDialog: boolean = false;
 
     @Getter('currentEntry') entry!: Entry;
     @State categories!: string[];

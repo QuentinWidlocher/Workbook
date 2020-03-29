@@ -120,7 +120,7 @@
         }
     },
     "settings": {
-        "welcome": "Soyez le bienvenue, {name}.",
+        "welcome": "Soyez le bienvenu, {name}.",
         "general": {
             "label": "Paramètres généraux",
             "autosave": "Sauvegarde automatique",

@@ -1,12 +1,12 @@
-import { Vue, Prop, Component, Watch } from "vue-property-decorator";
+import { Vue, Prop, Component, Watch } from 'vue-property-decorator';
 
 @Component
 export default class ItemsSelector extends Vue {
-    @Prop({ default: () => []}) items!: string[];
-    @Prop({ default: () => []}) selectedItems!: string[];
+    @Prop({ default: () => [] }) items!: string[];
+    @Prop({ default: () => [] }) selectedItems!: string[];
     @Prop({ default: false }) deletion!: boolean;
     @Prop({ default: false }) creation!: boolean;
-    
+
     search: string = '';
     newItem: string = '';
 
@@ -24,7 +24,7 @@ export default class ItemsSelector extends Vue {
         return this.items.filter((item: string) => {
             const text = item.toLowerCase();
             return text.indexOf(search) > -1;
-        })
+        });
     }
 
     private selectItem(item: string) {
@@ -40,6 +40,7 @@ export default class ItemsSelector extends Vue {
     }
 
     private addItem() {
+        if (!this.newItem) return;
         const index = this.items.push(this.newItem);
         this.selectedItems.push(this.newItem);
         this.newItem = '';
@@ -48,6 +49,6 @@ export default class ItemsSelector extends Vue {
     @Watch('selectedItems')
     onSelectedChange() {
         this.search = '';
-        this.$emit('update:selectedItems', this.selectedItems)
+        this.$emit('update:selectedItems', this.selectedItems);
     }
 }

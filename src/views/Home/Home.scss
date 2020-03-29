@@ -1,26 +1,33 @@
-.row,
-.col-entry-list,
-.col-editor,
-.col-search {
-    height: 100%;
-}
-
-#EntryList {
-    flex: 1;
-}
-
-.col-entry-list {
-    display: flex;
-    flex-direction: column;
-}
-
-.btn-add,
-.search-bar {
-    flex: initial;
-}
-
 .empty-zone {
     display: flex;
     width: 100%;
     height: 100%;
+}
+
+#search {
+    grid-column: 0;
+}
+
+#home {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 1fr;
+    gap: 1rem;
+
+    &.home {
+        grid-template-columns: 1fr 1fr 3fr;
+    }
+
+    &.search {
+        grid-template-columns: 3fr 1fr;
+    }
+
+    &-search {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-editor {
+        grid-column: 3;
+    }
 }

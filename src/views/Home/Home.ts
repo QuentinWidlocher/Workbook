@@ -9,6 +9,7 @@ import { savingSpinner } from '@/services/savingSpinner';
 import { State, Getter } from 'vuex-class';
 import { State2Way } from 'vuex-class-state2way';
 import Search from '@/components/Search/Search.vue';
+import ItemsSelector from '@/components/ItemsSelector/ItemsSelector.vue';
 import SearchCriterias from '@/models/searchCriterias';
 import { loadingSpinner } from '@/services/loadingSpinner';
 import { categoriesService } from '@/services/categories';
@@ -20,6 +21,7 @@ import ListItem from '@/models/listItem';
         Edition,
         ItemList,
         Search,
+        ItemsSelector,
     },
 })
 export default class Home extends Vue {
@@ -29,6 +31,7 @@ export default class Home extends Vue {
     @State2Way('setEntries', 'entries') entries!: Entry[];
     @State originalEntries!: Entry[];
     @Getter currentEntry!: Entry;
+    @State categories!: string[];
 
     itemList: ListItem[] = [];
     selectedItem: number = 0;
